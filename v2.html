@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA</title>
+    <title>SAKURA V2</title>
     <style>
         :root {
             --primary: #ff77ff; 
@@ -36,68 +36,70 @@
 
         header h1 { 
             text-align: center;
-            margin: 10px 0; 
-            font-size: 2rem; 
+            margin: 5px 0; 
+            font-size: 1.8rem; 
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 5px;
         }
 
-        /* CONTAINER DAS COLUNAS */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-bottom: 20px;
-        }
-
-        .category-title {
-            font-size: 0.7rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin: 10px 0 5px;
-            border-bottom: 1px solid var(--secondary);
-        }
-
-        .item {
-            display: flex;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            font-size: 0.75rem;
-        }
-
-        .item label { display: flex; align-items: center; gap: 5px; }
-        .price { color: var(--primary); font-weight: bold; font-size: 0.7rem; margin-left: 22px; }
-
-        /* PAINEL CENTRAL DO TOTAL */
         .total-panel {
             background: linear-gradient(to bottom, #1a051a, #000);
-            padding: 15px;
+            padding: 12px;
             border-radius: 15px;
             text-align: center;
             border: 2px solid var(--primary);
-            box-shadow: 0 0 15px var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
             margin-bottom: 10px;
         }
 
-        .total-amount { font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--primary); }
+        .total-amount { font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--primary); }
 
         .btn-copy {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: var(--primary);
             color: #000;
             border: none;
             border-radius: 8px;
             font-weight: bold;
             text-transform: uppercase;
+            margin-top: 5px;
         }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 0.65rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin: 12px 0 5px;
+            border-bottom: 1px solid var(--secondary);
+            font-weight: bold;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px;
+            border-radius: 5px;
+            margin-bottom: 4px;
+            font-size: 0.7rem;
+        }
+
+        .item label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .price { color: var(--primary); font-weight: bold; font-size: 0.65rem; margin-left: 20px; }
+
+        input[type="checkbox"] { accent-color: var(--primary); }
     </style>
 </head>
 <body>
@@ -106,7 +108,7 @@
     <header><h1>SAKURA</h1></header>
 
     <div class="total-panel">
-        <div style="font-size: 0.7rem; letter-spacing: 2px;">TOTAL A COBRAR</div>
+        <div style="font-size: 0.6rem; letter-spacing: 2px;">TOTAL A COBRAR</div>
         <div class="total-amount" id="display-total">$ 0</div>
         <button class="btn-copy" onclick="copiarRecibo()">Copiar Recibo</button>
     </div>
@@ -119,15 +121,30 @@
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Perolado</label><span class="price">$5k</span></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Rodas</label><span class="price">$10k</span></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Neon</label><span class="price">$5k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="3000"> Fumê</label><span class="price">$3k</span></div>
+            
+            <div class="category-title">🛠️ Lataria</div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Aerofólio</label><span class="price">$15k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lateral</label><span class="price">$12k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="20000"> Capô</label><span class="price">$20k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape</label><span class="price">$10k</span></div>
         </div>
 
         <div class="column">
             <div class="category-title">⚡ Performance</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor</label><span class="price">$50k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor G5</label><span class="price">$50k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="40000"> Transmissão</label><span class="price">$40k</span></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Turbo</label><span class="price">$50k</span></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Freios</label><span class="price">$50k</span></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Suspensão</label><span class="price">$50k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="30000"> Freios</label><span class="price">$30k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="35000"> Suspensão</label><span class="price">$35k</span></div>
+            
+            <div class="category-title">🛡️ Segurança</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="150000"> Blindagem</label><span class="price">$150k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="25000"> Pneu Prova Bala</label><span class="price">$25k</span></div>
+            
+            <div class="category-title">💎 Extras</div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa Custom</label><span class="price">$5k</span></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina</label><span class="price">$8k</span></div>
         </div>
     </div>
 </div>
@@ -147,7 +164,7 @@
     checkboxes.forEach(cb => cb.addEventListener('change', calcular));
 
     function copiarRecibo() {
-        let msg = `🌸 **SAKURA** 🌸\n`;
+        let msg = `🌸 **SAKURA MECÂNICA** 🌸\n`;
         let temItem = false;
         checkboxes.forEach(cb => {
             if(cb.checked) {
@@ -155,10 +172,10 @@
                 msg += `✨ ${cb.parentElement.innerText.trim()}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
             }
         });
-        if(!temItem) return alert("Selecione algo!");
-        msg += `💰 **TOTAL: ${totalDisplay.innerText}**`;
+        if(!temItem) return alert("Selecione pelo menos um item!");
+        msg += `\n💰 **TOTAL: ${totalDisplay.innerText}**`;
         navigator.clipboard.writeText(msg);
-        alert("Copiado!");
+        alert("Recibo copiado!");
     }
 </script>
 
