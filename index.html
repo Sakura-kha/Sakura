@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mecânica Sakura | Calculadora</title>
+    <style>
+        :root {
+            --primary: #ff77ff; 
+            --secondary: #a020f0;
+            --bg: #0a050a;
+            --card-bg: rgba(25, 10, 25, 0.98);
+            --text: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a051a 0%, #0a050a 100%);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(160, 32, 240, 0.3);
+            border: 1px solid rgba(255, 119, 255, 0.2);
+        }
+
+        header { text-align: center; margin-bottom: 25px; }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.5rem; 
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            font-weight: 900;
+        }
+        header p { color: var(--primary); font-size: 0.9rem; margin-top: 5px; letter-spacing: 2px; }
+
+        .category-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin: 25px 0 10px;
+            border-left: 3px solid var(--secondary);
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .item:hover { 
+            background: rgba(255, 119, 255, 0.1); 
+            border-color: var(--primary);
+        }
+
+        .item-left { display: flex; align-items: center; gap: 12px; flex-grow: 1; }
+        .item-left input { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+        .item-left label { cursor: pointer; width: 100%; font-size: 0.95rem; }
+        
+        .price { color: #ff99ff; font-weight: bold; min-width: 80px; text-align: right; font-family: 'Courier New', monospace; }
+
+        .footer-total {
+            margin-top: 30px;
+            background: linear-gradient(45deg, rgba(160, 32, 240, 0.3), rgba(255, 119, 255, 0.3));
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--primary);
+        }
+
+        .total-amount { font-size: 2.5rem; font-weight: bold; display: block; text-shadow: 0 0 10px var(--primary); margin: 5px 0; }
+
+        .btn-copy {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-copy:hover { filter: brightness(1.2); transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <header>
+        <h1>SAKURA</h1>
+        <p>🌸 MECÂNICA & TUNNING 🌸</p>
+    </header>
+
+    <div class="category-title">🎨 Pintura & Luz</div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="10000" id="c1"><label for="c1">Cor Primária</label></div><span class="price">$10.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="10000" id="c2"><label for="c2">Cor Secundária</label></div><span class="price">$10.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="5000" id="c3"><label for="c3">Perolado</label></div><span class="price">$5.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="5000" id="c4"><label for="c4">Neon</label></div><span class="price">$5.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="5000" id="c5"><label for="c5">Farol</label></div><span class="price">$5.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="10000" id="c6"><label for="c6">Vidro (G5)</label></div><span class="price">$10.000</span></div>
+
+    <div class="category-title">🏎️ Lataria & Estética</div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l1"><label for="l1">Parachoque Frente</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l2"><label for="l2">Parachoque Traseiro</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l3"><label for="l3">Saia Lateral</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l4"><label for="l4">Aerofólio</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l5"><label for="l5">Teto</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="15000" id="l6"><label for="l6">Capô</label></div><span class="price">$15.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="20000" id="l7"><label for="l7">Decal (Adesivo)</label></div><span class="price">$20.000</span></div>
+
+    <div class="category-title">🛞 Rodas</div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="10000" id="r1"><label for="r1">Roda Nova</label></div><span class="price">$10.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="3000" id="r2"><label for="r2">Cor da Roda</label></div><span class="price">$3.000</span></div>
+
+    <div class="category-title">⚡ Performance</div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="50000" id="p1"><label for="p1">Motor</label></div><span class="price">$50.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="50000" id="p2"><label for="p2">Freio</label></div><span class="price">$50.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="50000" id="p3"><label for="p3">Turbo</label></div><span class="price">$50.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="50000" id="p4"><label for="p4">Suspensão</label></div><span class="price">$50.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="50000" id="p5"><label for="p5">Transmissão</label></div><span class="price">$50.000</span></div>
+    <div class="item"><div class="item-left"><input type="checkbox" class="peca" data-preco="150000" id="p6"><label for="p6">Blindagem</label></div><span class="price">$150.000</span></div>
+
+    <div class="footer-total">
+        <span style="font-size: 0.8rem; opacity: 0.8; letter-spacing: 1px;">VALOR TOTAL</span>
+        <span class="total-amount" id="display-total">$ 0</span>
+        <button class="btn-copy" onclick="copiarRecibo()">Copiar para o Discord</button>
+    </div>
+</div>
+
+<script>
+    const checkboxes = document.querySelectorAll('.peca');
+    const totalDisplay = document.getElementById('display-total');
+
+    function calcular() {
+        let total = 0;
+        checkboxes.forEach(cb => {
+            if(cb.checked) {
+                total += parseInt(cb.dataset.preco);
+            }
+        });
+        totalDisplay.innerText = '$ ' + total.toLocaleString('pt-BR');
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener('change', calcular));
+
+    function copiarRecibo() {
+        let msg = `🌸 **MECÂNICA SAKURA** 🌸\n`;
+        msg += `──────────────────\n`;
+        let temItem = false;
+
+        checkboxes.forEach(cb => {
+            if(cb.checked) {
+                temItem = true;
+                const nome = cb.nextElementSibling.innerText;
+                const valor = parseInt(cb.dataset.preco).toLocaleString('pt-BR');
+                msg += `✨ ${nome}: $${valor}\n`;
+            }
+        });
+
+        if(!temItem) {
+            alert("Selecione ao menos uma peça!");
+            return;
+        }
+
+        msg += `──────────────────\n`;
+        msg += `💰 **TOTAL: ${totalDisplay.innerText}**`;
+
+        navigator.clipboard.writeText(msg);
+        alert("Recibo Sakura copiado!");
+    }
+</script>
+
+</body>
+</html>
