@@ -24,19 +24,8 @@
             overflow: hidden;
         }
 
-        /* EFEITO DE PÉTALAS CAINDO */
-        .snowflake {
-            color: #fff;
-            font-size: 1.2em;
-            font-family: Arial;
-            text-shadow: 0 0 1px #000;
-            position: fixed;
-            top: -10%;
-            z-index: 9999;
-            user-select: none;
-            cursor: default;
-            animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite;
-        }
+        /* PÉTALAS */
+        .snowflake { color: #fff; font-size: 1.2em; position: fixed; top: -10%; z-index: 9999; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; }
         @keyframes snowflakes-fall { 0% { top: -10%; } 100% { top: 100%; } }
         @keyframes snowflakes-shake { 0% { transform: translateX(0px); } 50% { transform: translateX(80px); } 100% { transform: translateX(0px); } }
 
@@ -50,20 +39,10 @@
             flex-direction: column;
             border-left: 2px solid var(--primary);
             border-right: 2px solid var(--primary);
-            box-shadow: 0 0 20px rgba(255, 119, 255, 0.2);
             backdrop-filter: blur(5px);
         }
 
-        header h1 { 
-            text-align: center;
-            margin: 5px 0; 
-            font-size: 1.8rem; 
-            background: linear-gradient(to right, #fff, var(--primary), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 5px;
-            filter: drop-shadow(0 0 5px var(--primary));
-        }
+        header h1 { text-align: center; margin: 5px 0; font-size: 1.8rem; background: linear-gradient(to right, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 5px; }
 
         .total-panel {
             background: rgba(0, 0, 0, 0.6);
@@ -71,18 +50,12 @@
             border-radius: 20px;
             text-align: center;
             border: 2px solid var(--primary);
-            box-shadow: 0 0 15px var(--secondary);
             margin-bottom: 15px;
         }
 
         .total-amount { font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--primary); }
 
-        .button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
+        .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 
         .btn {
             padding: 12px;
@@ -91,64 +64,45 @@
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.75rem;
-            cursor: pointer;
             background: var(--primary);
             color: #000;
-            box-shadow: 0 4px 0 #b34db3;
-            transition: 0.1s;
+            cursor: pointer;
         }
 
-        .btn:active {
-            transform: translateY(4px);
-            box-shadow: none;
-            background: var(--secondary);
-            color: #fff;
-        }
+        .content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow-y: auto; flex-grow: 1; padding-bottom: 20px; }
 
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-bottom: 20px;
-        }
+        .category-title { font-size: 0.7rem; color: var(--primary); text-transform: uppercase; margin: 15px 0 8px; font-weight: bold; border-bottom: 1px solid var(--secondary); }
 
-        .category-title {
-            font-size: 0.7rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin: 15px 0 8px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
+        /* AJUSTE PARA FICAR TUDO NA FRENTE */
         .item {
             background: rgba(255, 255, 255, 0.08);
-            padding: 8px;
+            padding: 10px;
             border-radius: 10px;
             margin-bottom: 5px;
-            border: 1px solid rgba(255, 119, 255, 0.1);
         }
 
-        .item label { display: flex; flex-direction: column; cursor: pointer; font-size: 0.75rem; }
-        .item input { margin-bottom: 5px; width: 18px; height: 18px; accent-color: var(--primary); }
-        .price { color: var(--primary); font-weight: bold; font-size: 0.7rem; }
+        .item label {
+            display: flex;
+            align-items: center; /* Alinha no meio da linha */
+            justify-content: flex-start;
+            gap: 8px; /* Espaço entre o check, nome e preço */
+            cursor: pointer;
+            font-size: 0.8rem;
+            flex-wrap: wrap; /* Garante que caiba em telas menores */
+        }
 
-        /* Scrollbar bonitinha */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        .item input { width: 18px; height: 18px; accent-color: var(--primary); margin: 0; }
+        
+        .price { 
+            color: var(--primary); 
+            font-weight: bold; 
+            margin-left: auto; /* Empurra o preço para o final da linha */
+        }
     </style>
 </head>
 <body>
 
-<div class="snowflake">🌸</div><div class="snowflake" style="left:10%;animation-delay:1s;">🌸</div>
-<div class="snowflake" style="left:20%;animation-delay:6s;">🌸</div><div class="snowflake" style="left:30%;animation-delay:4s;">🌸</div>
-<div class="snowflake" style="left:40%;animation-delay:2s;">🌸</div><div class="snowflake" style="left:50%;animation-delay:8s;">🌸</div>
-<div class="snowflake" style="left:60%;animation-delay:5s;">🌸</div><div class="snowflake" style="left:70%;animation-delay:3s;">🌸</div>
-<div class="snowflake" style="left:80%;animation-delay:7s;">🌸</div><div class="snowflake" style="left:90%;animation-delay:9s;">🌸</div>
+<div class="snowflake">🌸</div><div class="snowflake" style="left:15%">🌸</div><div class="snowflake" style="left:80%">🌸</div>
 
 <div class="main-card">
     <header><h1>SAKURA</h1></header>
@@ -166,35 +120,26 @@
     <div class="content-wrapper">
         <div class="column">
             <div class="category-title">🎨 Estética</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Cor Primária <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Cor Secundária <span class="price">$10k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Primária <span class="price">$10k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Secundária <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Perolado <span class="price">$5k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Rodas <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Neon <span class="price">$5k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="3000"> Fumê <span class="price">$3k</span></label></div>
             
             <div class="category-title">🛠️ Lataria</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Aerofólio <span class="price">$15k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lateral <span class="price">$12k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="20000"> Capô <span class="price">$20k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape <span class="price">$10k</span></label></div>
         </div>
 
         <div class="column">
             <div class="category-title">⚡ Performance</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor <span class="price">$50k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="40000"> Transmissão <span class="price">$40k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor G5 <span class="price">$50k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Turbo <span class="price">$50k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="30000"> Freios <span class="price">$30k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="35000"> Suspensão <span class="price">$35k</span></label></div>
             
             <div class="category-title">🛡️ Segurança</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="150000"> Blindagem <span class="price">$150k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="25000"> Pneu Bala <span class="price">$25k</span></label></div>
             
             <div class="category-title">💎 Extras</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa Custom <span class="price">$5k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina <span class="price">$8k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa <span class="price">$5k</span></label></div>
         </div>
     </div>
 </div>
@@ -205,16 +150,14 @@
 
     function calcular() {
         let total = 0;
-        checkboxes.forEach(cb => {
-            if(cb.checked) total += parseInt(cb.dataset.preco);
-        });
+        checkboxes.forEach(cb => { if(cb.checked) total += parseInt(cb.dataset.preco); });
         totalDisplay.innerText = '$ ' + total.toLocaleString('pt-BR');
     }
 
     checkboxes.forEach(cb => cb.addEventListener('change', calcular));
 
     function limparTudo() {
-        if(confirm("Deseja limpar todas as peças?")) {
+        if(confirm("Limpar tudo?")) {
             checkboxes.forEach(cb => cb.checked = false);
             calcular();
         }
@@ -226,15 +169,14 @@
         checkboxes.forEach(cb => {
             if(cb.checked) {
                 temItem = true;
-                const nomePeca = cb.parentElement.innerText.split('$')[0].trim();
-                const precoPeca = cb.dataset.preco;
-                msg += `✨ ${nomePeca}: $${parseInt(precoPeca).toLocaleString('pt-BR')}\n`;
+                const texto = cb.parentElement.innerText.split('$')[0].trim();
+                msg += `✨ ${texto}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
             }
         });
-        if(!temItem) return alert("Selecione algo primeiro!");
+        if(!temItem) return alert("Selecione algo!");
         msg += `\n💰 **TOTAL: ${totalDisplay.innerText}**`;
         navigator.clipboard.writeText(msg);
-        alert("Recibo copiado!");
+        alert("Copiado!");
     }
 </script>
 
