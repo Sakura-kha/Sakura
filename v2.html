@@ -14,8 +14,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #000 url('https://i.imgur.com/8QzXkS9.jpeg') no-repeat center center fixed;
-            background-size: cover;
+            background: #000;
             color: var(--text);
             margin: 0;
             display: flex;
@@ -34,30 +33,25 @@
             flex-direction: column;
             border-left: 2px solid var(--primary);
             border-right: 2px solid var(--primary);
-            backdrop-filter: blur(10px);
         }
 
-        /* NOME COM FLORES NAS LATERAIS */
         header { 
             text-align: center; 
-            padding: 15px 0;
+            padding: 10px 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         header h1 { 
             margin: 0; 
-            font-size: 2rem; 
+            font-size: 1.8rem; 
             background: linear-gradient(to right, #fff, var(--primary), #fff); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             letter-spacing: 5px;
-            font-weight: 900;
         }
-
-        .flower-icon { font-size: 1.8rem; filter: drop-shadow(0 0 5px var(--primary)); }
 
         .total-panel {
             background: rgba(0, 0, 0, 0.8);
@@ -66,10 +60,9 @@
             text-align: center;
             border: 2px solid var(--primary);
             margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(255, 119, 255, 0.2);
         }
 
-        .total-amount { font-size: 2.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
+        .total-amount { font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--primary); }
 
         .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         
@@ -79,32 +72,27 @@
             border-radius: 12px;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             background: var(--primary);
             color: #000;
             cursor: pointer;
-            transition: 0.2s;
         }
-
-        .btn:active { background: var(--secondary); color: #fff; }
 
         .content-wrapper { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
+            gap: 10px; 
             overflow-y: auto; 
             flex-grow: 1; 
-            padding: 5px;
         }
 
         .category-title { 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             color: var(--primary); 
             text-transform: uppercase; 
-            margin: 15px 0 8px; 
+            margin: 15px 0 5px; 
             font-weight: bold; 
             border-bottom: 1px solid var(--secondary);
-            padding-bottom: 3px;
         }
 
         .item { 
@@ -113,41 +101,44 @@
             border-radius: 10px; 
             margin-bottom: 6px;
             border: 1px solid rgba(255, 119, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        /* AQUI ESTÁ O CÓDIGO DE DESTAQUE QUE VOCÊ QUERIA */
+        .item:has(input:checked) {
+            background: rgba(255, 119, 255, 0.2); 
+            border: 1px solid var(--primary);    
+            box-shadow: 0 0 15px rgba(255, 119, 255, 0.4); 
+            transform: scale(1.02);
         }
 
         .item label { 
             display: flex; 
             align-items: center; 
             cursor: pointer; 
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             width: 100%;
         }
 
         .item input { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 10px; }
         
-        /* Preço na frente do nome */
-        .price { 
-            color: var(--primary); 
-            font-weight: bold; 
-            margin-left: auto; 
-            font-size: 0.75rem;
-        }
+        .price { color: var(--primary); font-weight: bold; margin-left: auto; }
 
         ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="main-card">
     <header>
-        <span class="flower-icon">🌸</span>
+        <span>🌸</span>
         <h1>SAKURA</h1>
-        <span class="flower-icon">🌸</span>
+        <span>🌸</span>
     </header>
 
     <div class="total-panel">
-        <div style="font-size: 0.6rem; letter-spacing: 3px; color: var(--primary); font-weight: bold;">VALOR TOTAL</div>
+        <div style="font-size: 0.6rem; letter-spacing: 2px;">TOTAL A COBRAR</div>
         <div class="total-amount" id="display-total">$ 0</div>
         <div class="button-group">
             <button class="btn" onclick="copiarRecibo()">Copiar</button>
@@ -172,7 +163,6 @@
             <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lat. <span class="price">$12k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Parachoque <span class="price">$15k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Teto <span class="price">$10k</span></label></div>
         </div>
 
         <div class="column">
@@ -191,7 +181,6 @@
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa <span class="price">$5k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina <span class="price">$8k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Interior <span class="price">$12k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Adesivos <span class="price">$5k</span></label></div>
         </div>
     </div>
 </div>
@@ -219,14 +208,14 @@
         checkboxes.forEach(cb => {
             if(cb.checked) {
                 temItem = true;
-                const textoPuro = cb.parentElement.innerText.split('$')[0].trim();
-                msg += `✨ ${textoPuro}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
+                const texto = cb.parentElement.innerText.split('$')[0].trim();
+                msg += `✨ ${texto}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
             }
         });
-        if(!temItem) return alert("Selecione os serviços!");
+        if(!temItem) return alert("Selecione algo!");
         msg += `\n💰 **TOTAL: ${totalDisplay.innerText}**`;
         navigator.clipboard.writeText(msg);
-        alert("Recibo copiado! 🌸");
+        alert("Copiado! 🌸");
     }
 </script>
 
