@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA V2 - PREMIUM</title>
+    <title>SAKURA V2 - COMPLETA</title>
     <style>
         :root {
             --primary: #ff77ff; 
@@ -24,7 +24,6 @@
             overflow: hidden;
         }
 
-        /* PÉTALAS */
         .snowflake { color: #fff; font-size: 1.2em; position: fixed; top: -10%; z-index: 9999; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; }
         @keyframes snowflakes-fall { 0% { top: -10%; } 100% { top: 100%; } }
         @keyframes snowflakes-shake { 0% { transform: translateX(0px); } 50% { transform: translateX(80px); } 100% { transform: translateX(0px); } }
@@ -71,9 +70,8 @@
 
         .content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow-y: auto; flex-grow: 1; padding-bottom: 20px; }
 
-        .category-title { font-size: 0.7rem; color: var(--primary); text-transform: uppercase; margin: 15px 0 8px; font-weight: bold; border-bottom: 1px solid var(--secondary); }
+        .category-title { font-size: 0.7rem; color: var(--primary); text-transform: uppercase; margin: 15px 0 8px; font-weight: bold; border-bottom: 1px solid var(--secondary); padding-bottom: 3px; }
 
-        /* AJUSTE PARA FICAR TUDO NA FRENTE */
         .item {
             background: rgba(255, 255, 255, 0.08);
             padding: 10px;
@@ -83,12 +81,11 @@
 
         .item label {
             display: flex;
-            align-items: center; /* Alinha no meio da linha */
+            align-items: center;
             justify-content: flex-start;
-            gap: 8px; /* Espaço entre o check, nome e preço */
+            gap: 8px;
             cursor: pointer;
-            font-size: 0.8rem;
-            flex-wrap: wrap; /* Garante que caiba em telas menores */
+            font-size: 0.75rem;
         }
 
         .item input { width: 18px; height: 18px; accent-color: var(--primary); margin: 0; }
@@ -96,7 +93,7 @@
         .price { 
             color: var(--primary); 
             font-weight: bold; 
-            margin-left: auto; /* Empurra o preço para o final da linha */
+            margin-left: auto;
         }
     </style>
 </head>
@@ -124,22 +121,38 @@
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Secundária <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Perolado <span class="price">$5k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Rodas <span class="price">$10k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Neon <span class="price">$5k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="3000"> Fumê <span class="price">$3k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Farol Xenon <span class="price">$8k</span></label></div>
             
             <div class="category-title">🛠️ Lataria</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Aerofólio <span class="price">$15k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lateral <span class="price">$12k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="20000"> Capô <span class="price">$20k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape <span class="price">$10k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Parachoque <span class="price">$15k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Grelha <span class="price">$12k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Teto <span class="price">$10k</span></label></div>
         </div>
 
         <div class="column">
             <div class="category-title">⚡ Performance</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor G5 <span class="price">$50k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="40000"> Transmissão <span class="price">$40k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Turbo <span class="price">$50k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="30000"> Freios <span class="price">$30k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="35000"> Suspensão <span class="price">$35k</span></label></div>
             
             <div class="category-title">🛡️ Segurança</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="150000"> Blindagem <span class="price">$150k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="25000"> Pneu Bala <span class="price">$25k</span></label></div>
             
             <div class="category-title">💎 Extras</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa <span class="price">$5k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa Custom <span class="price">$5k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina <span class="price">$8k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Interior <span class="price">$12k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Pintura Roda <span class="price">$15k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Adesivo <span class="price">$5k</span></label></div>
         </div>
     </div>
 </div>
