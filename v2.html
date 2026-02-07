@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA V2 - FLOWERS</title>
+    <title>SAKURA V2 - OFICIAL</title>
     <style>
         :root {
             --primary: #ff77ff; 
             --secondary: #a020f0;
             --text: #ffffff;
-            --card-bg: rgba(15, 5, 15, 0.92);
+            --card-bg: rgba(15, 5, 15, 0.95);
         }
 
         body {
@@ -24,11 +24,6 @@
             overflow: hidden;
         }
 
-        /* ANIMAÇÃO PÉTALAS CAINDO */
-        .snowflake { color: #fff; font-size: 1.2em; position: fixed; top: -10%; z-index: 9999; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; pointer-events: none; }
-        @keyframes snowflakes-fall { 0% { top: -10%; } 100% { top: 100%; } }
-        @keyframes snowflakes-shake { 0% { transform: translateX(0px); } 50% { transform: translateX(80px); } 100% { transform: translateX(0px); } }
-
         .main-card {
             background: var(--card-bg);
             width: 100%;
@@ -39,47 +34,45 @@
             flex-direction: column;
             border-left: 2px solid var(--primary);
             border-right: 2px solid var(--primary);
-            backdrop-filter: blur(8px);
-            position: relative;
+            backdrop-filter: blur(10px);
         }
 
-        /* DECORAÇÃO NO NOME SAKURA */
-        header { position: relative; padding: 10px 0; }
-        header h1 { 
+        /* NOME COM FLORES NAS LATERAIS */
+        header { 
             text-align: center; 
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        header h1 { 
             margin: 0; 
-            font-size: 2.2rem; 
+            font-size: 2rem; 
             background: linear-gradient(to right, #fff, var(--primary), #fff); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            letter-spacing: 8px;
-            position: relative;
-            z-index: 2;
-        }
-        .header-flowers {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 2.5rem;
-            opacity: 0.8;
-            z-index: 1;
-            pointer-events: none;
+            letter-spacing: 5px;
+            font-weight: 900;
         }
 
+        .flower-icon { font-size: 1.8rem; filter: drop-shadow(0 0 5px var(--primary)); }
+
         .total-panel {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             padding: 15px;
             border-radius: 20px;
             text-align: center;
             border: 2px solid var(--primary);
             margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(255, 119, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 119, 255, 0.2);
         }
 
         .total-amount { font-size: 2.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--primary); }
 
         .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        
         .btn {
             padding: 12px;
             border: none;
@@ -90,77 +83,115 @@
             background: var(--primary);
             color: #000;
             cursor: pointer;
-            box-shadow: 0 4px 0 #b34db3;
+            transition: 0.2s;
         }
-        .btn:active { transform: translateY(3px); box-shadow: none; }
 
-        .content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow-y: auto; flex-grow: 1; padding: 10px; position: relative; }
+        .btn:active { background: var(--secondary); color: #fff; }
 
-        /* PÉTALAS FIXAS ESPALHADAS */
-        .decor-flower { position: absolute; font-size: 1rem; opacity: 0.6; pointer-events: none; }
+        .content-wrapper { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
+            overflow-y: auto; 
+            flex-grow: 1; 
+            padding: 5px;
+        }
 
-        .category-title { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; margin: 15px 0 8px; font-weight: bold; border-bottom: 1px solid var(--secondary); display: flex; align-items: center; gap: 5px; }
+        .category-title { 
+            font-size: 0.75rem; 
+            color: var(--primary); 
+            text-transform: uppercase; 
+            margin: 15px 0 8px; 
+            font-weight: bold; 
+            border-bottom: 1px solid var(--secondary);
+            padding-bottom: 3px;
+        }
 
-        .item { background: rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 12px; margin-bottom: 6px; border: 1px solid rgba(255, 119, 255, 0.1); }
-        .item label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.8rem; }
-        .item input { width: 18px; height: 18px; accent-color: var(--primary); }
-        .price { color: var(--primary); font-weight: bold; margin-left: auto; font-size: 0.75rem; }
+        .item { 
+            background: rgba(255, 255, 255, 0.07); 
+            padding: 10px; 
+            border-radius: 10px; 
+            margin-bottom: 6px;
+            border: 1px solid rgba(255, 119, 255, 0.05);
+        }
+
+        .item label { 
+            display: flex; 
+            align-items: center; 
+            cursor: pointer; 
+            font-size: 0.78rem;
+            width: 100%;
+        }
+
+        .item input { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 10px; }
+        
+        /* Preço na frente do nome */
+        .price { 
+            color: var(--primary); 
+            font-weight: bold; 
+            margin-left: auto; 
+            font-size: 0.75rem;
+        }
+
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<div class="snowflake">🌸</div><div class="snowflake" style="left:10%; animation-delay:2s">🌸</div>
-<div class="snowflake" style="left:25%; animation-delay:5s">🌸</div><div class="snowflake" style="left:50%; animation-delay:1s">🌸</div>
-<div class="snowflake" style="left:75%; animation-delay:6s">🌸</div><div class="snowflake" style="left:90%; animation-delay:3s">🌸</div>
-
 <div class="main-card">
     <header>
-        <div class="header-flowers">🌸 🌸 🌸</div>
+        <span class="flower-icon">🌸</span>
         <h1>SAKURA</h1>
-        <div class="header-flowers" style="top: 30px; font-size: 1.5rem;">🌸 🌸 🌸 🌸 🌸</div>
+        <span class="flower-icon">🌸</span>
     </header>
 
     <div class="total-panel">
-        <div style="font-size: 0.7rem; letter-spacing: 3px; color: var(--primary);">TOTAL DO SERVIÇO</div>
+        <div style="font-size: 0.6rem; letter-spacing: 3px; color: var(--primary); font-weight: bold;">VALOR TOTAL</div>
         <div class="total-amount" id="display-total">$ 0</div>
         <div class="button-group">
-            <button class="btn" onclick="copiarRecibo()">Copiar Recibo</button>
-            <button class="btn" onclick="limparTudo()">Limpar Tudo</button>
+            <button class="btn" onclick="copiarRecibo()">Copiar</button>
+            <button class="btn" onclick="limparTudo()">Limpar</button>
         </div>
     </div>
 
     <div class="content-wrapper">
-        <span class="decor-flower" style="top:10%; left:5%">🌸</span>
-        <span class="decor-flower" style="top:40%; right:10%">🌸</span>
-        <span class="decor-flower" style="bottom:20%; left:15%">🌸</span>
-
         <div class="column">
-            <div class="category-title">🎨 Estética 🌸</div>
+            <div class="category-title">🎨 Estética</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Primária <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Secundária <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Perolado <span class="price">$5k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Rodas <span class="price">$10k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Neon <span class="price">$5k</span></label></div>
-            
-            <div class="category-title">🛠️ Lataria 🌸</div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="3000"> Fumê <span class="price">$3k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Xenon <span class="price">$8k</span></label></div>
+
+            <div class="category-title">🛠️ Lataria</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Aerofólio <span class="price">$15k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="20000"> Capô <span class="price">$20k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lat. <span class="price">$12k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape <span class="price">$10k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Parachoque <span class="price">$15k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Teto <span class="price">$10k</span></label></div>
         </div>
 
         <div class="column">
-            <div class="category-title">⚡ Performance 🌸</div>
+            <div class="category-title">⚡ Performance</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor G5 <span class="price">$50k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="40000"> Transm. <span class="price">$40k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Turbo <span class="price">$50k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="30000"> Freios <span class="price">$30k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="35000"> Suspensão <span class="price">$35k</span></label></div>
             
-            <div class="category-title">🛡️ Segurança 🌸</div>
+            <div class="category-title">🛡️ Segurança</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="150000"> Blindagem <span class="price">$150k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="25000"> Pneu Bala <span class="price">$25k</span></label></div>
             
-            <div class="category-title">💎 Extras 🌸</div>
+            <div class="category-title">💎 Extras</div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa <span class="price">$5k</span></label></div>
             <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina <span class="price">$8k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Interior <span class="price">$12k</span></label></div>
+            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Adesivos <span class="price">$5k</span></label></div>
         </div>
     </div>
 </div>
@@ -178,10 +209,8 @@
     checkboxes.forEach(cb => cb.addEventListener('change', calcular));
 
     function limparTudo() {
-        if(confirm("Deseja limpar todos os campos?")) {
-            checkboxes.forEach(cb => cb.checked = false);
-            calcular();
-        }
+        checkboxes.forEach(cb => cb.checked = false);
+        calcular();
     }
 
     function copiarRecibo() {
@@ -190,11 +219,11 @@
         checkboxes.forEach(cb => {
             if(cb.checked) {
                 temItem = true;
-                const texto = cb.parentElement.innerText.split('$')[0].trim();
-                msg += `✨ ${texto}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
+                const textoPuro = cb.parentElement.innerText.split('$')[0].trim();
+                msg += `✨ ${textoPuro}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
             }
         });
-        if(!temItem) return alert("Selecione algo!");
+        if(!temItem) return alert("Selecione os serviços!");
         msg += `\n💰 **TOTAL: ${totalDisplay.innerText}**`;
         navigator.clipboard.writeText(msg);
         alert("Recibo copiado! 🌸");
