@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Sakura - Style Edition</title>
+    <title>Calculadora Sakura - Final Edition</title>
     <style>
         /* CONFIGURAÇÕES GERAIS */
         body {
@@ -26,29 +26,45 @@
             box-shadow: 0 0 30px rgba(255, 66, 233, 0.1);
         }
 
-        /* CABEÇALHO E TOTAL */
+        /* CABEÇALHO */
         .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { color: #ff42e9; font-size: 3.5rem; letter-spacing: 12px; text-shadow: 0 0 15px #ff42e9; }
+        .header h1 { 
+            color: #ff42e9; 
+            font-size: 3.5rem; 
+            letter-spacing: 12px; 
+            text-shadow: 0 0 10px #ff42e9; 
+        }
         
         .total-box {
-            background: rgba(255, 66, 233, 0.05);
-            border: 1px solid rgba(255, 66, 233, 0.3);
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid #ff42e9;
             border-radius: 15px;
             padding: 30px;
             display: inline-block;
             min-width: 450px;
         }
 
-        .total-box h2 {
-            font-size: 4rem;
-            margin: 10px 0 25px 0;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        .total-box span {
+            color: #ff42e9;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
         }
 
-        /* BOTÕES */
+        /* VALOR TOTAL - NEON SUAVE */
+        #display-total {
+            font-size: 4.5rem;
+            margin: 15px 0 25px 0;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            /* Brilho reduzido como pedido */
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff42e9;
+        }
+
+        /* BOTÕES IGUAIS */
         .buttons { display: flex; gap: 20px; justify-content: center; }
+        
         .btn {
             padding: 15px 40px;
             border-radius: 50px;
@@ -56,11 +72,18 @@
             font-weight: 800;
             text-transform: uppercase;
             transition: 0.3s;
+            background: #ff42e9; /* Ambos Rosa */
+            color: #000;         /* Ambos Texto Preto */
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 66, 233, 0.4);
+            font-size: 0.9rem;
         }
-        .btn-copiar { background: #ff42e9; color: #000; border: none; }
-        .btn-copiar:hover { background: #fff; transform: scale(1.05); }
-        .btn-limpar { background: transparent; color: #ff42e9; border: 2px solid #ff42e9; }
-        .btn-limpar:hover { background: #ff42e9; color: #000; }
+
+        .btn:hover { 
+            background: #fff; 
+            transform: scale(1.05); 
+            box-shadow: 0 0 20px #fff;
+        }
 
         /* GRID */
         .grid-sections {
@@ -70,8 +93,17 @@
             margin-top: 40px;
         }
 
-        .section { background: #0d0d0d; padding: 25px; border-radius: 15px; border: 1px solid #1a1a1a; }
-        .section-title { color: #ff42e9; font-weight: bold; border-left: 4px solid #ff42e9; padding-left: 15px; margin-bottom: 20px; }
+        .section { background: #0d0d0d; padding: 25px; border-radius: 15px; border: 1px solid #222; }
+        .section-title { 
+            color: #ff42e9; 
+            font-weight: bold; 
+            border-left: 4px solid #ff42e9; 
+            padding-left: 15px; 
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
         /* ITENS */
         .item {
@@ -89,33 +121,27 @@
 
         .item:hover {
             background: #1e1e1e;
-            transform: translateX(8px);
+            transform: translateX(5px);
             border-color: rgba(255, 66, 233, 0.4);
         }
 
         .item.active { background: rgba(255, 66, 233, 0.15); border-color: #ff42e9; }
 
-        /* --- NOVO ESTILO DOS VALORES ($10k, etc) --- */
+        /* ESTILO DOS VALORES (COMO ESTAVA ANTES) */
         .price {
-            font-family: 'Courier New', Courier, monospace; /* Fonte estilo código */
+            font-family: 'Courier New', Courier, monospace;
             font-size: 1.2rem;
             font-weight: 900;
-            color: #fff; /* Branco para destacar */
-            background: rgba(255, 66, 233, 0.2); /* Fundo sutil rosa */
+            color: #fff;
+            background: rgba(255, 66, 233, 0.2);
             padding: 4px 10px;
             border-radius: 6px;
-            text-shadow: 0 0 8px #ff42e9; /* Brilho neon rosa atrás do número branco */
             letter-spacing: 1px;
             border: 1px solid rgba(255, 66, 233, 0.3);
             transition: 0.3s;
         }
 
-        .item:hover .price {
-            background: #ff42e9;
-            color: #000;
-            text-shadow: none;
-            transform: scale(1.1);
-        }
+        .item:hover .price { background: #ff42e9; color: #000; }
 
         .item-info { display: flex; align-items: center; gap: 15px; pointer-events: none; }
         .item input[type="checkbox"] { accent-color: #ff42e9; width: 20px; height: 20px; }
@@ -133,61 +159,60 @@
                 <span>Total a cobrar</span>
                 <h2 id="display-total">$ 0</h2>
                 <div class="buttons">
-                    <button class="btn btn-copiar" onclick="copiar()">Copiar Valor</button>
-                    <button class="btn btn-limpar" onclick="limpar()">Limpar Tudo</button>
+                    <button class="btn" onclick="copiar()">Copiar Valor</button>
+                    <button class="btn" onclick="limpar()">Limpar Tudo</button>
                 </div>
             </div>
         </div>
 
         <div class="grid-sections">
             <div class="section">
-                <div class="section-title">ESTÉTICA</div>
+                <div class="section-title">🎨 ESTÉTICA</div>
                 <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> Primária</div><div class="price">$10k</div></div>
                 <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> Secundária</div><div class="price">$10k</div></div>
                 <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox"> Perolado</div><div class="price">$5k</div></div>
-                <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> Rodas</div><div class="price">$10k</div></div>
-                <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox"> Neon</div><div class="price">$5k</div></div>
-                <div class="item" onclick="toggleItem(this, 3000)"><div class="item-info"><input type="checkbox"> Fumê</div><div class="price">$3k</div></div>
-                <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox"> Xenon</div><div class="price">$8k</div></div>
+                <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox">  Rodas</div><div class="price">$10k</div></div>
+                <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox">  Neon</div><div class="price">$5k</div></div>
+                <div class="item" onclick="toggleItem(this, 3000)"><div class="item-info"><input type="checkbox">  Fumê</div><div class="price">$3k</div></div>
+                <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox">  Xenon</div><div class="price">$8k</div></div>
             </div>
 
             <div class="section">
-                <div class="section-title">PERFORMANCE / SEGURANÇA</div>
-                <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox"> Motor G5</div><div class="price">$50k</div></div>
-                <div class="item" onclick="toggleItem(this, 40000)"><div class="item-info"><input type="checkbox"> Transm.</div><div class="price">$40k</div></div>
-                <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox"> Turbo</div><div class="price">$50k</div></div>
-                <div class="item" onclick="toggleItem(this, 150000)"><div class="item-info"><input type="checkbox"> Blindagem</div><div class="price">$150k</div></div>
-                <div class="item" onclick="toggleItem(this, 25000)"><div class="item-info"><input type="checkbox"> Pneu Bala</div><div class="price">$25k</div></div>
+                <div class="section-title">⚡ PERFORMANCE</div>
+                <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox">  Motor G5</div><div class="price">$50k</div></div>
+                <div class="item" onclick="toggleItem(this, 40000)"><div class="item-info"><input type="checkbox">  Transmissão</div><div class="price">$40k</div></div>
+                <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox">  Turbo</div><div class="price">$50k</div></div>
+                <div class="item" onclick="toggleItem(this, 30000)"><div class="item-info"><input type="checkbox">  Freios</div><div class="price">$30k</div></div>
+                
+                <div class="section-title" style="margin-top:20px;">🛡️ SEGURANÇA</div>
+                <div class="item" onclick="toggleItem(this, 150000)"><div class="item-info"><input type="checkbox">  Blindagem</div><div class="price">$150k</div></div>
+                <div class="item" onclick="toggleItem(this, 25000)"><div class="item-info"><input type="checkbox">  Pneu Bala</div><div class="price">$25k</div></div>
             </div>
 
             <div class="section">
-                <div class="section-title">LATARIA / EXTRAS</div>
-                <div class="item" onclick="toggleItem(this, 15000)"><div class="item-info"><input type="checkbox"> Aerofólio</div><div class="price">$15k</div></div>
-                <div class="item" onclick="toggleItem(this, 20000)"><div class="item-info"><input type="checkbox"> Capô</div><div class="price">$20k</div></div>
-                <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> Escape</div><div class="price">$10k</div></div>
-                <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox"> Buzina</div><div class="price">$8k</div></div>
-                <div class="item" onclick="toggleItem(this, 12000)"><div class="item-info"><input type="checkbox"> Interior</div><div class="price">$12k</div></div>
+                <div class="section-title">🛠️ LATARIA</div>
+                <div class="item" onclick="toggleItem(this, 15000)"><div class="item-info"><input type="checkbox">  Aerofólio</div><div class="price">$15k</div></div>
+                <div class="item" onclick="toggleItem(this, 20000)"><div class="item-info"><input type="checkbox">  Capô</div><div class="price">$20k</div></div>
+                <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox">  Escape</div><div class="price">$10k</div></div>
+                <div class="item" onclick="toggleItem(this, 15000)"><div class="item-info"><input type="checkbox">  Parachoque</div><div class="price">$15k</div></div>
+
+                <div class="section-title" style="margin-top:20px;">💎 EXTRAS</div>
+                <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox">  Placa</div><div class="price">$5k</div></div>
+                <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox">  Buzina</div><div class="price">$8k</div></div>
+                <div class="item" onclick="toggleItem(this, 12000)"><div class="item-info"><input type="checkbox">  Interior</div><div class="price">$12k</div></div>
             </div>
         </div>
     </div>
 
     <script>
         let total = 0;
-
         function toggleItem(el, price) {
             const cb = el.querySelector('input');
             cb.checked = !cb.checked;
-            
-            if(cb.checked) {
-                el.classList.add('active');
-                total += price;
-            } else {
-                el.classList.remove('active');
-                total -= price;
-            }
+            if(cb.checked) { el.classList.add('active'); total += price; } 
+            else { el.classList.remove('active'); total -= price; }
             document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`;
         }
-
         function limpar() {
             total = 0;
             document.querySelectorAll('.item').forEach(i => {
@@ -196,13 +221,13 @@
             });
             document.getElementById('display-total').innerText = "$ 0";
         }
-
         function copiar() {
             const val = document.getElementById('display-total').innerText;
             navigator.clipboard.writeText(val);
-            const btn = document.querySelector('.btn-copiar');
+            const btn = document.querySelectorAll('.btn')[0];
+            const original = btn.innerText;
             btn.innerText = "Copiado!";
-            setTimeout(() => btn.innerText = "Copiar Valor", 1000);
+            setTimeout(() => btn.innerText = original, 1000);
         }
     </script>
 </body>
