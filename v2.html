@@ -8,20 +8,20 @@
     <style>
         :root {
             --neon-pink: #ff42e9;
-            --neon-blue: #00f2ff;
             --glass-bg: rgba(50, 5, 10, 0.25); 
         }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        /* --- RESET PARA ZERO SCROLL --- */
+        * { box-sizing: border-box; transition: all 0.2s ease; margin: 0; padding: 0; }
         
         body {
-            height: 100vh; margin: 0; overflow: hidden; background: #000; color: #fff;
-            font-family: 'Segoe UI', Roboto, sans-serif; display: flex; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw; overflow: hidden; background: #000; color: #fff;
+            font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center;
         }
 
-        /* --- TELA DE LOGIN --- */
+        /* --- TELA DE LOGIN ANTERIOR (MELHORADA) --- */
         #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; inset: 0;
             background: radial-gradient(circle, rgba(20,0,20,0.8) 0%, rgba(0,0,0,0.95) 100%);
             z-index: 9999; display: flex; justify-content: center; align-items: center;
             backdrop-filter: blur(25px);
@@ -29,10 +29,19 @@
 
         .login-box {
             background: rgba(15, 15, 15, 0.7);
-            padding: 50px 40px; border-radius: 20px;
+            padding: 50px 40px;
+            border-radius: 20px;
             border: 1px solid rgba(255, 66, 233, 0.3);
-            text-align: center; width: 380px;
+            text-align: center;
+            position: relative;
+            width: 380px;
             box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 20px rgba(255, 66, 233, 0.1);
+            overflow: hidden;
+        }
+
+        .login-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
         }
 
         .login-box h2 {
@@ -55,68 +64,91 @@
         }
 
         .login-box button {
-            background: transparent; color: var(--neon-pink);
-            border: 2px solid var(--neon-pink); padding: 12px 40px;
-            font-family: 'Orbitron'; font-weight: 900; border-radius: 50px;
-            cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
-        }
-
-        .login-box button:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 30px var(--neon-pink); }
-
-        /* --- CALCULADORA --- */
-        .bg-image { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -2; }
-        .bg-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.45); z-index: -1; }
-        #petal-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
-        .petal { position: absolute; background: linear-gradient(135deg, #ffb7d5, #ff80b3); border-radius: 100% 0% 100% 0%; opacity: 0.8; filter: drop-shadow(0 0 5px var(--neon-pink)); animation: fall-continuous linear infinite; }
-        @keyframes fall-continuous { 0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; } 100% { top: 110%; transform: translateX(250px) rotate(720deg); opacity: 0; } }
-
-        #calc-content { display: none; position: relative; z-index: 10; width: 98%; max-width: 1600px; height: 92vh; flex-direction: column; gap: 20px; }
-        .main-header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; text-align: center; text-transform: uppercase; letter-spacing: 18px; text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink); margin: 0; }
-        .dashboard { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 25px; flex: 1; padding: 10px; overflow-y: auto; }
-        
-        .section { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255, 66, 233, 0.25); border-radius: 25px; padding: 25px; margin-bottom: 20px; }
-        .section-title { color: #fff; font-family: 'Orbitron'; font-size: 0.9rem; font-weight: 900; letter-spacing: 5px; margin-bottom: 20px; display: flex; align-items: center; text-shadow: 0 0 10px var(--neon-pink); text-transform: uppercase; }
-        .section-title::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--neon-pink), transparent); margin-left: 15px; }
-        
-        .item { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.3); margin-bottom: 12px; padding: 14px 20px; border-radius: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
-        .item:hover { background: rgba(255, 66, 233, 0.3); border-color: var(--neon-pink); transform: scale(1.02); }
-        .item.active { background: var(--neon-pink); color: #000; font-weight: 900; box-shadow: 0 0 25px var(--neon-pink); }
-        
-        .price { font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 800; background: rgba(0, 0, 0, 0.6); padding: 8px 16px; border-radius: 8px; color: #fff; border: 1px solid var(--neon-pink); min-width: 110px; text-align: right; }
-        .item.active .price { background: #000; color: var(--neon-pink); border-color: #000; }
-
-        .total-box { 
-            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); 
-            border: 5px solid var(--neon-pink); border-radius: 40px; 
-            padding: 30px 20px; text-align: center; 
-            box-shadow: 0 0 60px rgba(255, 66, 233, 0.3); margin-bottom: 25px; 
-        }
-        #display-total { font-size: 5rem; font-weight: 900; font-family: 'Orbitron'; text-shadow: 0 0 20px #fff, 0 0 40px var(--neon-pink); margin: 10px 0; }
-
-        /* BOTÃO APAGAR TUDO DESTACADO E ROSA */
-        .btn-clear {
             background: transparent;
             color: var(--neon-pink);
             border: 2px solid var(--neon-pink);
-            padding: 12px 30px;
+            padding: 12px 40px;
             font-family: 'Orbitron';
-            font-size: 0.8rem;
             font-weight: 900;
             border-radius: 50px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 15px;
-            box-shadow: 0 0 15px rgba(255, 66, 233, 0.2);
-            animation: button-pulse 2s infinite;
+            letter-spacing: 2px;
         }
 
-        .btn-clear:hover {
+        .login-box button:hover {
             background: var(--neon-pink);
             color: #000;
-            box-shadow: 0 0 35px var(--neon-pink);
-            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--neon-pink);
         }
+
+        /* --- CALCULADORA COMPACTA --- */
+        .bg-image { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+        .bg-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: -1; }
+        #petal-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+        .petal { position: absolute; background: linear-gradient(135deg, #ffb7d5, #ff80b3); border-radius: 100% 0%; opacity: 0.6; animation: fall-continuous linear infinite; }
+        @keyframes fall-continuous { 0% { top: -10%; transform: rotate(0deg); } 100% { top: 110%; transform: rotate(720deg); } }
+
+        #calc-content { 
+            display: none; position: relative; z-index: 10; 
+            width: 95vw; height: 95vh; flex-direction: column; gap: 10px; 
+        }
+
+        .main-header h1 { 
+            font-family: 'Orbitron'; font-size: 1.8rem; text-align: center; 
+            letter-spacing: 10px; text-shadow: 0 0 15px var(--neon-pink); padding: 5px 0;
+        }
+
+        .dashboard { 
+            display: grid; grid-template-columns: 1fr 1.1fr 1fr; 
+            gap: 15px; flex: 1; height: 80%; 
+        }
+        
+        .section { 
+            background: var(--glass-bg); backdrop-filter: blur(8px); 
+            border: 1px solid rgba(255, 66, 233, 0.2); border-radius: 20px; 
+            padding: 12px; flex: 1; display: flex; flex-direction: column; 
+        }
+
+        .section-title { 
+            font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900; 
+            letter-spacing: 3px; margin-bottom: 10px; color: var(--neon-pink);
+            border-bottom: 1px solid rgba(255,66,233,0.3); padding-bottom: 5px;
+        }
+
+        .item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(0, 0, 0, 0.3); margin-bottom: 6px; padding: 8px 12px; 
+            border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+        }
+        .item:hover { background: rgba(255, 66, 233, 0.2); transform: scale(1.02); }
+        .item.active { background: var(--neon-pink); color: #000; font-weight: 800; box-shadow: 0 0 15px var(--neon-pink); }
+        
+        .price { 
+            font-family: 'Orbitron'; font-size: 0.7rem; background: rgba(0, 0, 0, 0.5); 
+            padding: 4px 10px; border-radius: 5px; color: #fff; border: 1px solid var(--neon-pink); 
+        }
+        .item.active .price { background: #000; color: var(--neon-pink); border-color: #000; }
+
+        .total-box { 
+            background: rgba(0, 0, 0, 0.5); border: 4px solid var(--neon-pink); 
+            border-radius: 25px; padding: 15px; text-align: center; 
+            box-shadow: 0 0 40px rgba(255, 66, 233, 0.2); 
+        }
+        #display-total { 
+            font-size: 3.8rem; font-weight: 900; font-family: 'Orbitron'; 
+            text-shadow: 0 0 15px var(--neon-pink); margin: 5px 0; 
+        }
+
+        /* BOTÃO APAGAR ROSA E DESTACADO */
+        .btn-clear {
+            background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink);
+            padding: 10px 25px; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: 900;
+            border-radius: 50px; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 66, 233, 0.2);
+            animation: button-pulse 2s infinite;
+        }
+        .btn-clear:hover { background: var(--neon-pink); color: #000; transform: scale(1.05); }
 
         @keyframes button-pulse {
             0% { box-shadow: 0 0 10px rgba(255, 66, 233, 0.2); }
@@ -133,69 +165,66 @@
             <input type="password" id="passInput" placeholder="DIGITE A CHAVE">
             <br>
             <button onclick="checkPass()">Autorizar</button>
+            <p style="margin-top: 20px; font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px;">ENCRYPTED ACCESS ONLY</p>
         </div>
     </div>
 
-    <img src="https://cdn.centralcart.io/stores/14825/template_options/23375/background-image-519fa73b.png" class="bg-image" alt="Background">
+    <img src="https://cdn.centralcart.io/stores/14825/template_options/23375/background-image-519fa73b.png" class="bg-image">
     <div class="bg-overlay"></div>
     <div id="petal-container"></div>
 
     <div id="calc-content">
-        <div class="main-header"><h1>🌸 Sakura mecânica 🌸</h1></div>
+        <div class="main-header"><h1>🌸 SAKURA MECÂNICA 🌸</h1></div>
+        
         <div class="dashboard">
             <div class="side-column">
                 <div class="section">
                     <div class="section-title">Performance</div>
-                    <div class="item" onclick="toggleItem(this, 50000)">Motor <span class="price">$ 50.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 40000)">Transmissão <span class="price">$ 40.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 50000)">Turbo <span class="price">$ 50.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 30000)">Freios <span class="price">$ 30.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 35000)">Suspensão <span class="price">$ 35.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 50000)">Motor <span class="price">$ 50k</span></div>
+                    <div class="item" onclick="toggleItem(this, 40000)">Transmissão <span class="price">$ 40k</span></div>
+                    <div class="item" onclick="toggleItem(this, 50000)">Turbo <span class="price">$ 50k</span></div>
+                    <div class="item" onclick="toggleItem(this, 30000)">Freios <span class="price">$ 30k</span></div>
+                    <div class="item" onclick="toggleItem(this, 35000)">Suspensão <span class="price">$ 35k</span></div>
                 </div>
                 <div class="section">
                     <div class="section-title">Segurança</div>
-                    <div class="item" onclick="toggleItem(this, 150000)">Blindagem <span class="price">$ 150.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 25000)">Pneu resistente a bala <span class="price">$ 25.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 150000)">Blindagem <span class="price">$ 150k</span></div>
+                    <div class="item" onclick="toggleItem(this, 25000)">Pneu Bala <span class="price">$ 25k</span></div>
                 </div>
             </div>
 
             <div class="center-column">
                 <div class="total-box">
-                    <span style="letter-spacing:10px; color:var(--neon-pink); font-family:Orbitron; font-weight:900">VALOR TOTAL</span>
+                    <span style="font-size:0.7rem; letter-spacing:5px; color:var(--neon-pink); font-family:Orbitron;">TOTAL</span>
                     <div id="display-total">$ 0</div>
                     <button class="btn-clear" onclick="clearAll()">Apagar Tudo</button>
                 </div>
                 <div class="section">
-                    <div class="section-title">Estética Externa</div>
-                    <div class="item" onclick="toggleItem(this, 10000)">Parachoque dianteiro <span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 10000)">Parachoque traseiro <span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Aerofólio <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 8000)">Teto <span class="price">$ 8.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Saia lateral<span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Capô<span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Adesivo<span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Cor primária <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Cor secundária<span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Perolado<span class="price">$ 15.000</span></div>
+                    <div class="section-title">Estética</div>
+                    <div class="item" onclick="toggleItem(this, 10000)">P. Choque D. <span class="price">$ 10k</span></div>
+                    <div class="item" onclick="toggleItem(this, 10000)">P. Choque T. <span class="price">$ 10k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Aerofólio <span class="price">$ 15k</span></div>
+                    <div class="item" onclick="toggleItem(this, 8000)">Teto <span class="price">$ 8k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Saia Lateral <span class="price">$ 15k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Cor Primária <span class="price">$ 15k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Perolado <span class="price">$ 15k</span></div>
                 </div>
             </div>
 
             <div class="side-column">
                 <div class="section">
-                    <div class="section-title">Interior</div>
-                    <div class="item" onclick="toggleItem(this, 12000)">Banco<span class="price">$ 12.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 10000)">Som <span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 3000)">Fumê <span class="price">$ 3.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Volante <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Painel <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Câmbio<span class="price">$ 15.000</span></div>
+                    <div class="section-title">Interior & Tech</div>
+                    <div class="item" onclick="toggleItem(this, 12000)">Banco <span class="price">$ 12k</span></div>
+                    <div class="item" onclick="toggleItem(this, 10000)">Som <span class="price">$ 10k</span></div>
+                    <div class="item" onclick="toggleItem(this, 3000)">Fumê <span class="price">$ 3k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Painel <span class="price">$ 15k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Volante <span class="price">$ 15k</span></div>
                 </div>
                 <div class="section">
-                    <div class="section-title">Extras Tech</div>
-                    <div class="item" onclick="toggleItem(this, 8000)">Buzina <span class="price">$ 8.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 5000)">Placa <span class="price">$ 5.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Retrovisor <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Porta placa <span class="price">$ 15.000</span></div>
+                    <div class="section-title">Extras</div>
+                    <div class="item" onclick="toggleItem(this, 8000)">Buzina <span class="price">$ 8k</span></div>
+                    <div class="item" onclick="toggleItem(this, 5000)">Placa <span class="price">$ 5k</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Retrovisor <span class="price">$ 15k</span></div>
                 </div>
             </div>
         </div>
@@ -203,11 +232,28 @@
 
     <script>
         function checkPass() {
-            if (document.getElementById('passInput').value === 'sakurass') {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('calc-content').style.display = 'flex';
-            } else { alert('Acesso Negado'); }
+            const pass = document.getElementById('passInput').value;
+            if (pass === 'sakurass') {
+                const ls = document.getElementById('login-screen');
+                ls.style.opacity = '0';
+                setTimeout(() => {
+                    ls.style.display = 'none';
+                    document.getElementById('calc-content').style.display = 'flex';
+                }, 400);
+            } else {
+                const box = document.querySelector('.login-box');
+                box.style.borderColor = 'red';
+                box.style.boxShadow = '0 0 30px red';
+                setTimeout(() => {
+                    box.style.borderColor = 'rgba(255, 66, 233, 0.3)';
+                    box.style.boxShadow = '0 0 50px rgba(0, 0, 0, 1)';
+                }, 500);
+            }
         }
+
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { checkPass(); }
+        });
 
         let total = 0;
         function toggleItem(el, price) {
@@ -229,16 +275,16 @@
         function createPetal() {
             const container = document.getElementById('petal-container');
             const petal = document.createElement('div');
-            const size = Math.random() * 15 + 8 + 'px';
+            const size = Math.random() * 10 + 5 + 'px';
             petal.className = 'petal';
             petal.style.width = size; petal.style.height = size;
             petal.style.left = Math.random() * 100 + 'vw';
             const duration = Math.random() * 5 + 5;
             petal.style.animationDuration = duration + 's';
             container.appendChild(petal);
-            setTimeout(() => { petal.remove(); }, duration * 1000);
+            setTimeout(() => petal.remove(), duration * 1000);
         }
-        setInterval(createPetal, 200);
+        setInterval(createPetal, 300);
     </script>
 </body>
 </html>
