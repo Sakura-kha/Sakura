@@ -3,251 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Sakura - Layout Centralizado</title>
+    <title>Sakura Neon Express - Ultra Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --neon-pink: #ff42e9;
+            --neon-blue: #00f2ff;
+            --glass-bg: rgba(50, 5, 10, 0.25); 
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
+            height: 100vh; margin: 0; overflow: hidden; background: #000; color: #fff;
+            font-family: 'Segoe UI', Roboto, sans-serif; display: flex; justify-content: center; align-items: center;
         }
 
-        /* LOGIN OVERLAY */
-        #login-overlay {
+        /* --- TELA DE LOGIN MELHORADA --- */
+        #login-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999;
-        }
-        .login-box { text-align: center; border: 2px solid #ff42e9; padding: 30px; border-radius: 15px; }
-        .login-box input { background: #111; border: 1px solid #ff42e9; padding: 10px; color: #fff; margin-bottom: 15px; text-align: center; outline: none; }
-
-        /* ESTRUTURA PRINCIPAL */
-        #calc-content { display: none; width: 100%; max-width: 1800px; }
-
-        .main-header {
-            text-align: center;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .main-header h1 { 
-            color: #ff42e9; 
-            font-size: 4rem; 
-            letter-spacing: 15px; 
-            margin: 10px 0; 
-            text-shadow: 0 0 15px #ff42e9; 
+            background: radial-gradient(circle, rgba(20,0,20,0.8) 0%, rgba(0,0,0,0.95) 100%);
+            z-index: 9999; display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(25px);
         }
 
-        /* LAYOUT EM 3 PARTES (ESQUERDA - CENTRO - DIREITA) */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 450px 1fr; /* Peças | Calculadora | Peças */
-            gap: 20px;
-            align-items: start;
-        }
-
-        /* COLUNAS DE PEÇAS */
-        .side-column {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* BLOCO DA CALCULADORA CENTRAL */
-        .center-column {
-            position: sticky;
-            top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .total-box {
-            background: rgba(10, 10, 10, 0.95);
-            border: 3px solid #ff42e9;
-            padding: 40px 20px;
+        .login-box {
+            background: rgba(15, 15, 15, 0.7);
+            padding: 50px 40px;
             border-radius: 20px;
+            border: 1px solid rgba(255, 66, 233, 0.3);
             text-align: center;
-            width: 100%;
-            box-shadow: 0 0 25px rgba(255, 66, 233, 0.2);
+            position: relative;
+            width: 380px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 20px rgba(255, 66, 233, 0.1);
+            overflow: hidden;
         }
-        .total-box span { color: #ff42e9; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; }
-        
-        #display-total { 
-            font-size: 4.5rem; 
-            margin: 20px 0; 
-            color: #fff; 
-            font-family: 'Courier New', monospace; 
+
+        /* Linha decorativa no topo */
+        .login-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+        }
+
+        .login-box h2 {
+            font-family: 'Orbitron'; font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 30px;
+            color: #fff; text-shadow: 0 0 10px var(--neon-pink);
+            animation: pulse-text 2s infinite;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-pink); }
+            50% { opacity: 0.8; text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink); }
+        }
+
+        .login-box input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 66, 233, 0.3);
+            padding: 18px; border-radius: 12px; color: #fff;
+            font-family: 'Orbitron'; text-align: center; outline: none;
+            width: 100%; margin-bottom: 25px; font-size: 1rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .login-box input:focus {
+            border-color: var(--neon-pink);
+            background: rgba(255, 66, 233, 0.05);
+            box-shadow: 0 0 15px rgba(255, 66, 233, 0.2);
+        }
+
+        .login-box button {
+            background: transparent;
+            color: var(--neon-pink);
+            border: 2px solid var(--neon-pink);
+            padding: 12px 40px;
+            font-family: 'Orbitron';
             font-weight: 900;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff42e9; 
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
         }
 
-        .buttons { display: flex; gap: 15px; width: 100%; justify-content: center; }
-        .btn { 
-            padding: 15px 30px; border-radius: 50px; cursor: pointer; 
-            font-weight: bold; text-transform: uppercase; border: none;
-            background: #ff42e9; color: #000; transition: 0.3s; font-size: 0.9rem;
-            flex: 1;
-            max-width: 150px;
-        }
-        .btn:hover { background: #fff; box-shadow: 0 0 15px #fff; transform: scale(1.05); }
-
-        /* ESTILO DAS SEÇÕES E ITENS */
-        .section { background: #0d0d0d; padding: 15px; border-radius: 12px; border: 1px solid #222; }
-        .section-title { 
-            color: #ff42e9; font-size: 0.9rem; font-weight: bold; 
-            border-bottom: 1px solid #ff42e9; padding-bottom: 8px; 
-            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        .login-box button:hover {
+            background: var(--neon-pink);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-pink);
         }
 
-        .item {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #151515; padding: 8px 12px; margin-bottom: 6px;
-            border-radius: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;
-        }
-        .item:hover { background: #1e1e1e; border-color: #ff42e9; transform: translateX(5px); }
-        .item.active { background: rgba(255, 66, 233, 0.15); border-color: #ff42e9; }
-        
-        .item-info { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; pointer-events: none; }
-        .item input { accent-color: #ff42e9; width: 16px; height: 16px; }
+        /* --- RESTANTE DO CSS (CALCULADORA) --- */
+        .bg-image { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -2; }
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.45); z-index: -1; }
+        #petal-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
+        .petal { position: absolute; background: linear-gradient(135deg, #ffb7d5, #ff80b3); border-radius: 100% 0% 100% 0%; opacity: 0.8; filter: drop-shadow(0 0 5px var(--neon-pink)); animation: fall-continuous linear infinite; }
+        @keyframes fall-continuous { 0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { top: 110%; transform: translateX(250px) rotate(720deg); opacity: 0; } }
 
-        .price { 
-            font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; 
-            color: #fff; background: rgba(255, 66, 233, 0.2); 
-            padding: 3px 8px; border-radius: 5px;
-        }
-        .item:hover .price { background: #ff42e9; color: #000; }
-
-        /* Responsividade básica */
-        @media (max-width: 1200px) {
-            .dashboard { grid-template-columns: 1fr; }
-            .center-column { order: -1; position: relative; margin-bottom: 20px; }
-        }
+        #calc-content { display: none; position: relative; z-index: 10; width: 98%; max-width: 1600px; height: 92vh; flex-direction: column; gap: 20px; }
+        .main-header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; text-align: center; text-transform: uppercase; letter-spacing: 18px; text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink); margin: 0; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 25px; flex: 1; padding: 10px; }
+        .section { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 66, 233, 0.25); border-radius: 25px; padding: 25px; }
+        .section-title { color: #fff; font-family: 'Orbitron'; font-size: 0.9rem; font-weight: 900; letter-spacing: 5px; margin-bottom: 20px; display: flex; align-items: center; text-shadow: 0 0 10px var(--neon-pink); text-transform: uppercase; }
+        .section-title::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--neon-pink), transparent); margin-left: 15px; }
+        .item { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.3); margin-bottom: 12px; padding: 14px 20px; border-radius: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
+        .item:hover { background: rgba(255, 66, 233, 0.3); border-color: var(--neon-pink); transform: scale(1.02); }
+        .item.active { background: var(--neon-pink); color: #000; font-weight: 900; box-shadow: 0 0 25px var(--neon-pink); }
+        .price { font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 800; background: rgba(0, 0, 0, 0.6); padding: 8px 16px; border-radius: 8px; color: #fff; border: 1px solid var(--neon-pink); min-width: 110px; text-align: right; }
+        .item.active .price { background: #000; color: var(--neon-pink); border-color: #000; }
+        .total-box { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); border: 5px solid var(--neon-pink); border-radius: 40px; padding: 40px 20px; text-align: center; box-shadow: 0 0 60px rgba(255, 66, 233, 0.3); margin-bottom: 25px; }
+        #display-total { font-size: 6.5rem; font-weight: 900; font-family: 'Orbitron'; text-shadow: 0 0 20px #fff, 0 0 40px var(--neon-pink); }
     </style>
 </head>
 <body>
 
-    <div id="login-overlay">
+    <div id="login-screen">
         <div class="login-box">
-            <h2>🌸 ACESSO SAKURA 🌸</h2>
-            <input type="password" id="pass-input" placeholder="Chave de Acesso">
+            <h2>LOGIN SAKURA</h2>
+            <input type="password" id="passInput" placeholder="DIGITE A CHAVE">
             <br>
-            <button class="btn" style="max-width: 100%;" onclick="checkLogin()">Entrar</button>
+            <button onclick="checkPass()">Autorizar</button>
+            <p style="margin-top: 20px; font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px;">ENCRYPTED ACCESS ONLY</p>
         </div>
     </div>
 
-    <div id="calc-content">
-        <div class="main-header">
-            <h1>🌸 SAKURA 🌸</h1>
-        </div>
+    <img src="https://cdn.centralcart.io/stores/14825/template_options/23375/background-image-519fa73b.png" class="bg-image" alt="Background">
+    <div class="bg-overlay"></div>
+    <div id="petal-container"></div>
 
+    <div id="calc-content">
+        <div class="main-header"><h1>🌸 Sakura Express 🌸</h1></div>
         <div class="dashboard">
             <div class="side-column">
                 <div class="section">
-                    <div class="section-title">⚡ PERFORMANCE</div>
-                    <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox"> ⚙️ Motor G5</div><div class="price">$50k</div></div>
-                    <div class="item" onclick="toggleItem(this, 40000)"><div class="item-info"><input type="checkbox"> 🕹️ Transmissão</div><div class="price">$40k</div></div>
-                    <div class="item" onclick="toggleItem(this, 50000)"><div class="item-info"><input type="checkbox"> 🐌 Turbo</div><div class="price">$50k</div></div>
-                    <div class="item" onclick="toggleItem(this, 30000)"><div class="item-info"><input type="checkbox"> 🛑 Freios</div><div class="price">$30k</div></div>
-                    <div class="item" onclick="toggleItem(this, 35000)"><div class="item-info"><input type="checkbox"> 📉 Suspensão</div><div class="price">$35k</div></div>
+                    <div class="section-title">Performance</div>
+                    <div class="item" onclick="toggleItem(this, 50000)">Motor G5 <span class="price">$ 50.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 40000)">Transmissão <span class="price">$ 40.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 50000)">Turbo <span class="price">$ 50.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 30000)">Freios <span class="price">$ 30.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 35000)">Suspensão <span class="price">$ 35.000</span></div>
                 </div>
-                <div class="section">
-                    <div class="section-title">🛡️ SEGURANÇA</div>
-                    <div class="item" onclick="toggleItem(this, 150000)"><div class="item-info"><input type="checkbox"> 🧱 Blindagem</div><div class="price">$150k</div></div>
-                    <div class="item" onclick="toggleItem(this, 25000)"><div class="item-info"><input type="checkbox"> 🛞 Pneu Bala</div><div class="price">$25k</div></div>
-                </div>
-                <div class="section">
-                    <div class="section-title">🛋️ INTERIOR</div>
-                    <div class="item" onclick="toggleItem(this, 12000)"><div class="item-info"><input type="checkbox"> 💺 Painel/Bancos</div><div class="price">$12k</div></div>
-                    <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox"> 🎡 Volante</div><div class="price">$8k</div></div>
-                    <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> 🔊 Som Automotivo</div><div class="price">$10k</div></div>
+                <div class="section" style="margin-top:20px">
+                    <div class="section-title">Segurança</div>
+                    <div class="item" onclick="toggleItem(this, 150000)">Blindagem <span class="price">$ 150.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 25000)">Pneu Bala <span class="price">$ 25.000</span></div>
                 </div>
             </div>
 
             <div class="center-column">
                 <div class="total-box">
-                    <span>Valor Total a Cobrar</span>
-                    <h2 id="display-total">$ 0</h2>
-                    <div class="buttons">
-                        <button class="btn" onclick="copiar()">Copiar</button>
-                        <button class="btn" onclick="limpar()">Limpar</button>
-                    </div>
+                    <span style="letter-spacing:10px; color:var(--neon-pink); font-family:Orbitron; font-weight:900">VALOR TOTAL</span>
+                    <div id="display-total">$ 0</div>
                 </div>
-                <p style="color: #444; margin-top: 20px; font-size: 0.8rem;">Sakura Management System v2.0</p>
+                <div class="section">
+                    <div class="section-title">Estética Externa</div>
+                    <div class="item" onclick="toggleItem(this, 10000)">Pintura <span class="price">$ 10.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 10000)">Rodas <span class="price">$ 10.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Aerofólio <span class="price">$ 15.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 8000)">Xenon <span class="price">$ 8.000</span></div>
+                </div>
             </div>
 
             <div class="side-column">
                 <div class="section">
-                    <div class="section-title">🎨 ESTÉTICA</div>
-                    <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> 💧 Primária</div><div class="price">$10k</div></div>
-                    <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> 💧 Secundária</div><div class="price">$10k</div></div>
-                    <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox"> ✨ Perolado</div><div class="price">$5k</div></div>
-                    <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> 🛞 Rodas</div><div class="price">$10k</div></div>
-                    <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox"> 🚨 Neon</div><div class="price">$5k</div></div>
-                    <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox"> 💡 Xenon</div><div class="price">$8k</div></div>
-                    <div class="item" onclick="toggleItem(this, 3000)"><div class="item-info"><input type="checkbox"> 🕶️ Fumê</div><div class="price">$3k</div></div>
+                    <div class="section-title">Interior</div>
+                    <div class="item" onclick="toggleItem(this, 12000)">Couro <span class="price">$ 12.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 10000)">Som <span class="price">$ 10.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 3000)">Fumê <span class="price">$ 3.000</span></div>
                 </div>
-                <div class="section">
-                    <div class="section-title">🛠️ LATARIA / EXTRAS</div>
-                    <div class="item" onclick="toggleItem(this, 15000)"><div class="item-info"><input type="checkbox"> 🏁 Aerofólio</div><div class="price">$15k</div></div>
-                    <div class="item" onclick="toggleItem(this, 20000)"><div class="item-info"><input type="checkbox"> 🏎️ Capô</div><div class="price">$20k</div></div>
-                    <div class="item" onclick="toggleItem(this, 12000)"><div class="item-info"><input type="checkbox"> 📏 Saia Lateral</div><div class="price">$12k</div></div>
-                    <div class="item" onclick="toggleItem(this, 10000)"><div class="item-info"><input type="checkbox"> 💨 Escape</div><div class="price">$10k</div></div>
-                    <div class="item" onclick="toggleItem(this, 15000)"><div class="item-info"><input type="checkbox"> 🛡️ Parachoque</div><div class="price">$15k</div></div>
-                    <div class="item" onclick="toggleItem(this, 5000)"><div class="item-info"><input type="checkbox"> 🔢 Placa</div><div class="price">$5k</div></div>
-                    <div class="item" onclick="toggleItem(this, 8000)"><div class="item-info"><input type="checkbox"> 📢 Buzina</div><div class="price">$8k</div></div>
+                <div class="section" style="margin-top:20px">
+                    <div class="section-title">Extras Tech</div>
+                    <div class="item" onclick="toggleItem(this, 15000)">Parachoque <span class="price">$ 15.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 8000)">Buzina <span class="price">$ 8.000</span></div>
+                    <div class="item" onclick="toggleItem(this, 5000)">Placa <span class="price">$ 5.000</span></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const CHAVE = "sakurass";
-
-        function checkLogin() {
-            const input = document.getElementById('pass-input').value;
-            if (input === CHAVE) {
-                document.getElementById('login-overlay').style.display = "none";
-                document.getElementById('calc-content').style.display = "block";
+        function checkPass() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === 'sakurass') {
+                const ls = document.getElementById('login-screen');
+                ls.style.opacity = '0';
+                setTimeout(() => {
+                    ls.style.display = 'none';
+                    document.getElementById('calc-content').style.display = 'flex';
+                }, 400);
             } else {
-                alert("Chave incorreta!");
+                const box = document.querySelector('.login-box');
+                box.style.borderColor = 'red';
+                box.style.boxShadow = '0 0 30px red';
+                setTimeout(() => {
+                    box.style.borderColor = 'rgba(255, 66, 233, 0.3)';
+                    box.style.boxShadow = '0 0 50px rgba(0, 0, 0, 1)';
+                }, 500);
             }
         }
 
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { checkPass(); }
+        });
+
         let total = 0;
         function toggleItem(el, price) {
-            const cb = el.querySelector('input');
-            cb.checked = !cb.checked;
-            if(cb.checked) { el.classList.add('active'); total += price; } 
-            else { el.classList.remove('active'); total -= price; }
+            el.classList.toggle('active');
+            total = el.classList.contains('active') ? total + price : total - price;
             document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`;
         }
 
-        function limpar() {
-            total = 0;
-            document.querySelectorAll('.item').forEach(i => {
-                i.classList.remove('active');
-                i.querySelector('input').checked = false;
-            });
-            document.getElementById('display-total').innerText = "$ 0";
+        function createPetal() {
+            const container = document.getElementById('petal-container');
+            const petal = document.createElement('div');
+            const size = Math.random() * 15 + 8 + 'px';
+            petal.className = 'petal';
+            petal.style.width = size; petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 5 + 5;
+            petal.style.animationDuration = duration + 's';
+            container.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, duration * 1000);
         }
-
-        function copiar() {
-            const val = document.getElementById('display-total').innerText;
-            navigator.clipboard.writeText(val);
-            const btn = document.querySelectorAll('.btn')[1];
-            btn.innerText = "Copiado!";
-            setTimeout(() => btn.innerText = "Copiar", 1000);
-        }
-
-        // Enter no login
-        document.getElementById('pass-input').addEventListener("keyup", function(e) {
-            if (e.key === "Enter") checkLogin();
-        });
+        setInterval(createPetal, 200);
     </script>
 </body>
 </html>
