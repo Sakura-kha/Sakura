@@ -3,221 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA V2 - OFICIAL</title>
+    <title>Calculadora Sakura - Estendida</title>
     <style>
-        :root {
-            --primary: #ff77ff; 
-            --secondary: #a020f0;
-            --text: #ffffff;
-            --card-bg: rgba(15, 5, 15, 0.95);
-        }
-
+        /* CONFIGURAÇÕES GERAIS */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: var(--text);
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
         }
 
-        .main-card {
-            background: var(--card-bg);
-            width: 100%;
-            max-width: 500px;
-            height: 100%;
-            padding: 15px;
+        /* CONTAINER PRINCIPAL - Aqui é onde controlamos a largura */
+        .main-container {
+            width: 95%; /* Estica para ocupar quase a tela toda */
+            max-width: 1400px; /* Limite para não ficar exagerado em telas 4k */
+            border: 2px solid #ff42e9;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #050505;
+        }
+
+        /* CABEÇALHO */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #ff42e9;
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .total-box {
+            border: 2px solid #ff42e9;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        .total-box span {
+            display: block;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .total-box h2 {
+            font-size: 3rem;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .buttons {
             display: flex;
-            flex-direction: column;
-            border-left: 2px solid var(--primary);
-            border-right: 2px solid var(--primary);
+            gap: 10px;
+            justify-content: center;
         }
 
-        header { 
-            text-align: center; 
-            padding: 10px 0;
+        .btn {
+            flex: 1;
+            max-width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: #ff42e9;
+            color: #000;
+        }
+
+        /* GRID DE CONTEÚDO - O segredo para espalhar pros lados */
+        .grid-sections {
+            display: grid;
+            /* Cria 3 colunas se houver espaço, se não, ajusta sozinho */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .section {
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .section-title {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        header h1 { 
-            margin: 0; 
-            font-size: 1.8rem; 
-            background: linear-gradient(to right, #fff, var(--primary), #fff); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            letter-spacing: 5px;
-        }
-
-        .total-panel {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            border-radius: 20px;
-            text-align: center;
-            border: 2px solid var(--primary);
+            gap: 8px;
+            color: #ff42e9;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
             margin-bottom: 15px;
         }
 
-        .total-amount { font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--primary); }
-
-        .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        
-        .btn {
-            padding: 12px;
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            background: var(--primary);
-            color: #000;
-            cursor: pointer;
-        }
-
-        .content-wrapper { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            overflow-y: auto; 
-            flex-grow: 1; 
-        }
-
-        .category-title { 
-            font-size: 0.7rem; 
-            color: var(--primary); 
-            text-transform: uppercase; 
-            margin: 15px 0 5px; 
-            font-weight: bold; 
-            border-bottom: 1px solid var(--secondary);
-        }
-
-        .item { 
-            background: rgba(255, 255, 255, 0.07); 
-            padding: 10px; 
-            border-radius: 10px; 
-            margin-bottom: 6px;
-            border: 1px solid rgba(255, 119, 255, 0.05);
+        /* ITENS DA LISTA */
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1a1a1a;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
             transition: 0.3s;
         }
 
-        /* AQUI ESTÁ O CÓDIGO DE DESTAQUE QUE VOCÊ QUERIA */
-        .item:has(input:checked) {
-            background: rgba(255, 119, 255, 0.2); 
-            border: 1px solid var(--primary);    
-            box-shadow: 0 0 15px rgba(255, 119, 255, 0.4); 
-            transform: scale(1.02);
+        .item:hover {
+            background: #222;
         }
 
-        .item label { 
-            display: flex; 
-            align-items: center; 
-            cursor: pointer; 
-            font-size: 0.75rem;
-            width: 100%;
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .item input { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 10px; }
-        
-        .price { color: var(--primary); font-weight: bold; margin-left: auto; }
+        .item input[type="checkbox"] {
+            accent-color: #ff42e9;
+            width: 18px;
+            height: 18px;
+        }
 
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: var(--primary); }
+        .price {
+            color: #ff42e9;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="main-card">
-    <header>
-        <span>🌸</span>
-        <h1>SAKURA</h1>
-        <span>🌸</span>
-    </header>
+    <div class="main-container">
+        <div class="header">
+            <h1>🌸 SAKURA 🌸</h1>
+            
+            <div class="total-box">
+                <span>TOTAL A COBRAR</span>
+                <h2 id="display-total">$ 0</h2>
+                <div class="buttons">
+                    <button class="btn" onclick="copiar()">Copiar</button>
+                    <button class="btn" onclick="limpar()">Limpar</button>
+                </div>
+            </div>
+        </div>
 
-    <div class="total-panel">
-        <div style="font-size: 0.6rem; letter-spacing: 2px;">TOTAL A COBRAR</div>
-        <div class="total-amount" id="display-total">$ 0</div>
-        <div class="button-group">
-            <button class="btn" onclick="copiarRecibo()">Copiar</button>
-            <button class="btn" onclick="limparTudo()">Limpar</button>
+        <div class="grid-sections">
+            
+            <div class="section">
+                <div class="section-title">🎨 ESTÉTICA</div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="10000"> Primária</div>
+                    <div class="price">$10k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="10000"> Secundária</div>
+                    <div class="price">$10k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="5000"> Perolado</div>
+                    <div class="price">$5k</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">⚡ PERFORMANCE</div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="50000"> Motor G5</div>
+                    <div class="price">$50k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="40000"> Transmissão</div>
+                    <div class="price">$40k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="50000"> Turbo</div>
+                    <div class="price">$50k</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🛠️ LATARIA</div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="15000"> Aerofólio</div>
+                    <div class="price">$15k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="20000"> Capô</div>
+                    <div class="price">$20k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="15000"> Parachoque</div>
+                    <div class="price">$15k</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🛡️ SEGURANÇA</div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="150000"> Blindagem</div>
+                    <div class="price">$150k</div>
+                </div>
+                <div class="item">
+                    <div class="item-info"><input type="checkbox" class="calc-item" data-price="25000"> Pneu Bala</div>
+                    <div class="price">$25k</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="content-wrapper">
-        <div class="column">
-            <div class="category-title">🎨 Estética</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Primária <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Secundária <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Perolado <span class="price">$5k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Rodas <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Neon <span class="price">$5k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="3000"> Fumê <span class="price">$3k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Xenon <span class="price">$8k</span></label></div>
+    <script>
+        // Lógica simples para calcular o total
+        const checkboxes = document.querySelectorAll('.calc-item');
+        const displayTotal = document.getElementById('display-total');
 
-            <div class="category-title">🛠️ Lataria</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Aerofólio <span class="price">$15k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="20000"> Capô <span class="price">$20k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Saia Lat. <span class="price">$12k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="10000"> Escape <span class="price">$10k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="15000"> Parachoque <span class="price">$15k</span></label></div>
-        </div>
-
-        <div class="column">
-            <div class="category-title">⚡ Performance</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Motor G5 <span class="price">$50k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="40000"> Transm. <span class="price">$40k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="50000"> Turbo <span class="price">$50k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="30000"> Freios <span class="price">$30k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="35000"> Suspensão <span class="price">$35k</span></label></div>
-            
-            <div class="category-title">🛡️ Segurança</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="150000"> Blindagem <span class="price">$150k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="25000"> Pneu Bala <span class="price">$25k</span></label></div>
-            
-            <div class="category-title">💎 Extras</div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="5000"> Placa <span class="price">$5k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="8000"> Buzina <span class="price">$8k</span></label></div>
-            <div class="item"><label><input type="checkbox" class="peca" data-preco="12000"> Interior <span class="price">$12k</span></label></div>
-        </div>
-    </div>
-</div>
-
-<script>
-    const checkboxes = document.querySelectorAll('.peca');
-    const totalDisplay = document.getElementById('display-total');
-
-    function calcular() {
-        let total = 0;
-        checkboxes.forEach(cb => { if(cb.checked) total += parseInt(cb.dataset.preco); });
-        totalDisplay.innerText = '$ ' + total.toLocaleString('pt-BR');
-    }
-
-    checkboxes.forEach(cb => cb.addEventListener('change', calcular));
-
-    function limparTudo() {
-        checkboxes.forEach(cb => cb.checked = false);
-        calcular();
-    }
-
-    function copiarRecibo() {
-        let msg = `🌸 **SAKURA MECÂNICA** 🌸\n`;
-        let temItem = false;
-        checkboxes.forEach(cb => {
-            if(cb.checked) {
-                temItem = true;
-                const texto = cb.parentElement.innerText.split('$')[0].trim();
-                msg += `✨ ${texto}: $${parseInt(cb.dataset.preco).toLocaleString('pt-BR')}\n`;
-            }
+        checkboxes.forEach(box => {
+            box.addEventListener('change', () => {
+                let total = 0;
+                checkboxes.forEach(item => {
+                    if(item.checked) {
+                        total += parseInt(item.getAttribute('data-price'));
+                    }
+                });
+                displayTotal.innerText = `$ ${total.toLocaleString()}`;
+            });
         });
-        if(!temItem) return alert("Selecione algo!");
-        msg += `\n💰 **TOTAL: ${totalDisplay.innerText}**`;
-        navigator.clipboard.writeText(msg);
-        alert("Copiado! 🌸");
-    }
-</script>
 
+        function limpar() {
+            checkboxes.forEach(item => item.checked = false);
+            displayTotal.innerText = "$ 0";
+        }
+
+        function copiar() {
+            const total = displayTotal.innerText;
+            navigator.clipboard.writeText(total);
+            alert("Valor copiado: " + total);
+        }
+    </script>
 </body>
 </html>
