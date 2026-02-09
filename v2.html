@@ -2,7 +2,6 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sakura Mecânica - Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -13,16 +12,15 @@
             --price-bg: rgba(0, 0, 0, 0.85);
         }
 
-        /* --- RESET --- */
         * { box-sizing: border-box; transition: all 0.3s ease; margin: 0; padding: 0; }
         
         body {
             min-height: 100vh; width: 100%; background: #000; color: #fff;
-            font-family: 'Rajdhani', sans-serif; overflow-x: hidden; overflow-y: auto;
-            display: flex; flex-direction: column; align-items: center;
+            font-family: 'Rajdhani', sans-serif; overflow-x: hidden;
+            display: flex; flex-direction: column;
         }
 
-        /* --- FUNDO E PÉTALAS --- */
+        /* FUNDO */
         .bg-image { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.8; }
         .bg-overlay { position: fixed; inset: 0; background: radial-gradient(circle, transparent 20%, #000 120%); z-index: -1; }
         #petal-container { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
@@ -31,58 +29,132 @@
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
         @keyframes sway { 0%, 100% { margin-left: 0px; } 50% { margin-left: 50px; } }
 
-        /* --- TELA DE LOGIN --- */
-        #login-screen { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(20px); }
-        .login-box { background: rgba(20, 10, 20, 0.6); padding: 60px 40px; border-radius: 30px; border: 2px solid rgba(255, 66, 233, 0.2); text-align: center; width: 420px; box-shadow: 0 0 30px rgba(255, 66, 233, 0.1); animation: box-glow-soft 4s infinite ease-in-out; }
-        .login-box h2 { font-family: 'Orbitron'; font-size: 2rem; letter-spacing: 6px; margin-bottom: 40px; color: #fff; animation: text-glow-soft 3s infinite ease-in-out; }
-        @keyframes text-glow-soft { 0%, 100% { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px rgba(255, 66, 233, 0.3); opacity: 0.9; } 50% { text-shadow: 0 0 25px var(--neon-pink), 0 0 45px var(--neon-pink); opacity: 1; } }
-        @keyframes box-glow-soft { 0%, 100% { border-color: rgba(255, 66, 233, 0.3); box-shadow: 0 0 30px rgba(255, 66, 233, 0.1); } 50% { border-color: rgba(255, 66, 233, 0.8); box-shadow: 0 0 50px rgba(255, 66, 233, 0.3); } }
-        .login-box input { background: rgba(0, 0, 0, 0.5); border: 1px solid var(--neon-pink); padding: 20px; border-radius: 15px; color: #fff; font-family: 'Orbitron'; text-align: center; width: 100%; margin-bottom: 30px; outline: none; }
-        .btn-login { background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); padding: 18px 30px; font-family: 'Orbitron'; font-size: 1rem; font-weight: 900; border-radius: 50px; cursor: pointer; text-transform: uppercase; width: 100%; letter-spacing: 2px; }
-        .btn-login:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 40px var(--neon-pink); transform: scale(1.05); }
-
-        /* --- BOTÃO DE ÁUDIO --- */
-        #audio-control {
-            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
-            background: rgba(0,0,0,0.6); border: 2px solid var(--neon-pink);
-            color: var(--neon-pink); width: 50px; height: 50px; border-radius: 50%;
-            display: none; justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 0 15px var(--neon-pink);
+        /* HEADER SUPERIOR */
+        header {
+            position: sticky; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; backdrop-filter: blur(15px); background: rgba(10, 0, 5, 0.7);
+            border-bottom: 2px solid var(--neon-pink);
+            box-shadow: 0 5px 20px rgba(255, 66, 233, 0.2);
         }
-        #audio-control:hover { transform: scale(1.1); background: var(--neon-pink); color: #000; }
 
-        /* --- CONTEÚDO --- */
-        #calc-content { display: none; position: relative; z-index: 10; width: 95vw; max-width: 1400px; padding: 50px 0; flex-direction: column; gap: 20px; }
-        .main-header h1 { font-family: 'Orbitron'; font-size: 2.2rem; text-align: center; letter-spacing: 12px; text-shadow: 0 0 20px var(--neon-pink); margin-bottom: 30px; }
-        .total-box { background: rgba(0, 0, 0, 0.8); border: 2px solid var(--neon-pink); border-radius: 30px; padding: 25px; text-align: center; box-shadow: 0 0 40px rgba(255, 66, 233, 0.2); margin-bottom: 30px; }
-        #display-total { font-size: 4.5rem; font-weight: 700; font-family: 'Rajdhani', sans-serif; color: #fff; text-shadow: 0 0 15px var(--neon-pink); line-height: 1; }
-        .btn-clear-all { background: rgba(255, 66, 233, 0.05); color: var(--neon-pink); border: 2px solid var(--neon-pink); padding: 12px 40px; font-family: 'Orbitron'; font-size: 0.85rem; font-weight: 700; border-radius: 50px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; }
-        .btn-clear-all:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 30px var(--neon-pink); transform: scale(1.05); }
+        .mecanica-nome { 
+            font-family: 'Orbitron'; 
+            font-size: 3.8rem; 
+            font-weight: 900;
+            letter-spacing: 0.4px; 
+            color: #fff; 
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+            position: relative;
+        }
 
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        .section { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255, 66, 233, 0.15); border-radius: 24px; padding: 20px; margin-bottom: 20px; }
-        .section-title { font-family: 'Orbitron'; font-size: 0.85rem; font-weight: 900; letter-spacing: 4px; margin-bottom: 20px; color: var(--neon-pink); border-left: 4px solid var(--neon-pink); padding-left: 10px; }
-        .item { display: flex; justify-content: space-between; align-items: center; background: var(--item-bg); margin-bottom: 10px; padding: 12px 18px; border-radius: 14px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
-        .item:hover { background: rgba(255, 66, 233, 0.1); border-color: rgba(255, 66, 233, 0.4); transform: translateX(5px); }
-        .item.active { background: var(--neon-pink); color: #000; font-weight: 800; border-color: #fff; }
-        .price { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; background: var(--price-bg); padding: 4px 12px; border-radius: 8px; color: #ff9ef0; border: 1px solid var(--neon-pink); min-width: 100px; text-align: center; }
+        /* Enfeite do Nome */
+        .mecanica-nome::after {
+            content: '🌸';
+            font-size: 1.2rem;
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            filter: drop-shadow(0 0 2px var(--neon-pink));
+        }
+        
+        .total-container { 
+            text-align: right; 
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 66, 233, 0.3);
+            position: relative;
+        }
 
-        @media (max-width: 1100px) { .dashboard { grid-template-columns: 1fr; } }
+        #display-total { 
+            font-family: 'Orbitron'; 
+            font-size: 2.8rem; 
+            font-weight: 900; 
+            color: #fff; 
+            text-shadow: 0 0 15px var(--neon-pink); 
+        }
+
+        /* BOTÃO LIMPAR MELHORADO */
+        .btn-clear { 
+            background: transparent; 
+            color: var(--neon-pink); 
+            border: 2px solid var(--neon-pink); 
+            padding: 8px 20px; 
+            border-radius: 100px; 
+            cursor: pointer; 
+            font-family: 'Orbitron';
+            font-weight: 700;
+            font-size: 0.8rem; 
+            margin-top: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 66, 233, 0.2);
+            transition: 0.3s;
+        }
+
+        .btn-clear:hover { 
+            background: var(--neon-pink); 
+            color: #000; 
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: scale(1.05);
+        }
+
+        /* PLAYER CONTROLS */
+        .music-player-ui { position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.8); padding: 10px 15px; border-radius: 50px; border: 1px solid var(--neon-pink); box-shadow: 0 0 15px rgba(255, 66, 233, 0.3); }
+        #audio-control { cursor: pointer; font-size: 1.4rem; filter: drop-shadow(0 0 5px var(--neon-pink)); }
+        input[type=range] { width: 80px; height: 5px; cursor: pointer; accent-color: var(--neon-pink); }
+
+        /* CONTEÚDO PRINCIPAL */
+        #calc-content { width: 98vw; max-width: 1800px; margin: 30px auto; padding: 10px; }
+        
+        .dashboard { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+        }
+
+        .section { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255, 66, 233, 0.2); border-radius: 20px; padding: 20px; position: relative; overflow: hidden; }
+        
+        /* Enfeite de Canto da Categoria */
+        .section::before {
+            content: '🌸';
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            opacity: 0.2;
+            font-size: 2rem;
+        }
+
+        .section-title { font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 20px; color: var(--neon-pink); border-bottom: 1px solid var(--neon-pink); padding-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+        
+        .item { display: flex; justify-content: space-between; align-items: center; background: var(--item-bg); margin-bottom: 10px; padding: 12px 15px; border-radius: 12px; cursor: pointer; font-size: 1rem; border: 1px solid transparent; }
+        .item:hover { background: rgba(255, 66, 233, 0.15); border-color: rgba(255, 66, 233, 0.3); transform: translateX(5px); }
+        .item.active { background: var(--neon-pink); color: #000; font-weight: 800; box-shadow: 0 0 15px var(--neon-pink); border-color: #fff; }
+        .price { font-family: 'Rajdhani'; font-weight: 700; color: #ffb7f3; }
+        .active .price { color: #000; }
+
+        @media (max-width: 1400px) { header { padding: 20px 30px; } .mecanica-nome { font-size: 2rem; } }
+        @media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 750px) { .dashboard { grid-template-columns: 1fr; } .mecanica-nome { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
 
-    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+    <header>
+        <div class="mecanica-nome">SAKURA MECÂNICA</div>
+        <div class="total-container">
+            <div id="display-total">$ 0</div>
+            <button class="btn-clear" onclick="clearAll()">Limpar Tudo</button>
+        </div>
+    </header>
 
-    <div id="audio-control" onclick="toggleAudio()">
-        <span id="audio-icon">⏸️</span>
-    </div>
+    <div id="youtube-player"></div>
 
-    <div id="login-screen">
-        <div class="login-box">
-            <h2>Sakura Mecânica</h2>
-            <input type="password" id="passInput" placeholder="INSERIR CHAVE DE ACESSO">
-            <button class="btn-login" onclick="checkPass()">Entrar</button>
+    <div class="music-player-ui">
+        <span style="font-size: 11px; font-weight: bold; color: var(--neon-pink);">VOL</span>
+        <input type="range" id="volume-slider" min="0" max="100" value="40" oninput="changeVolume(this.value)">
+        <div id="audio-control" onclick="toggleAudio()">
+            <span id="audio-icon">▶️</span>
         </div>
     </div>
 
@@ -90,106 +162,83 @@
     <div class="bg-overlay"></div>
     <div id="petal-container"></div>
 
-    <div id="calc-content">
-        <div class="main-header"><h1>SAKURA MECÂNICA</h1></div>
-        <div class="total-box">
-            <p style="font-size:0.9rem; letter-spacing:8px; color:var(--neon-pink); font-family:Orbitron; margin-bottom:10px;">TOTAL DO ORÇAMENTO</p>
-            <div id="display-total">$ 0</div>
-            <button class="btn-clear-all" onclick="clearAll()">🗑️ Apagar tudo</button>
-        </div>
-        
+    <main id="calc-content">
         <div class="dashboard">
-            <div class="column">
-                <div class="section">
-                    <div class="section-title">🚀 Performance</div>
-                    <div class="item" onclick="toggleItem(this, 50000)">Motor <span class="price">$ 50.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 40000)">Transmissão <span class="price">$ 40.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 50000)">Turbo <span class="price">$ 50.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 30000)">Freios <span class="price">$ 30.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 35000)">Suspensão <span class="price">$ 35.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 150000)">Blindagem <span class="price">$ 150.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 25000)">Pneu a prova de bala <span class="price">$ 25.000</span></div>
-                </div>
+            <div class="section">
+                <div class="section-title">🚀 Performance</div>
+                <div class="item" onclick="toggleItem(this, 50000)">Motor <span class="price">$ 50.000</span></div>
+                <div class="item" onclick="toggleItem(this, 40000)">Transmissão <span class="price">$ 40.000</span></div>
+                <div class="item" onclick="toggleItem(this, 50000)">Turbo <span class="price">$ 50.000</span></div>
+                <div class="item" onclick="toggleItem(this, 30000)">Freios <span class="price">$ 30.000</span></div>
+                <div class="item" onclick="toggleItem(this, 35000)">Suspensão <span class="price">$ 35.000</span></div>
+                <div class="item" onclick="toggleItem(this, 150000)">Blindagem <span class="price">$ 150.000</span></div>
+                <div class="item" onclick="toggleItem(this, 25000)">Pneu B. Proof <span class="price">$ 25.000</span></div>
             </div>
-            <div class="column">
-                <div class="section">
-                    <div class="section-title">💫 Estética</div>
-                    <div class="item" onclick="toggleItem(this, 10000)">P. Choque Dianteiro <span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 10000)">P. Choque Traseiro<span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Aerofólio <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 8000)">Teto <span class="price">$ 8.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Saia Lateral <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Cor Primária <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Cor secundária <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Cor do farol<span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Perolado <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Adesivos <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Neon <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Rodas <span class="price">$ 15.000</span></div>
-                </div>
+
+            <div class="section">
+                <div class="section-title">🚘 Exterior</div>
+                <div class="item" onclick="toggleItem(this, 10000)">P. Choque Diant. <span class="price">$ 10.000</span></div>
+                <div class="item" onclick="toggleItem(this, 10000)">P. Choque Tras. <span class="price">$ 10.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Aerofólio <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 8000)">Teto <span class="price">$ 8.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Saia Lateral <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Gaiola <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Grelha <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Retrovisor <span class="price">$ 15.000</span></div>
             </div>
-            <div class="column">
-                <div class="section">
-                    <div class="section-title">🏎️ Interior</div>
-                    <div class="item" onclick="toggleItem(this, 12000)">Banco <span class="price">$ 12.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 10000)">Som <span class="price">$ 10.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 3000)">Fumê <span class="price">$ 3.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Painel <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Volante <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Câmbio <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Porta malas <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Bloco do motor <span class="price">$ 15.000</span></div>
-                    <div class="section-title" style="margin-top:20px; border-left:4px solid #fff; color:#fff;">💎 Extras</div>
-                    <div class="item" onclick="toggleItem(this, 8000)">Buzina <span class="price">$ 8.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 5000)">Placa <span class="price">$ 5.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Retrovisor <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Gaiola <span class="price">$ 15.000</span></div>
-                    <div class="item" onclick="toggleItem(this, 15000)">Grelha <span class="price">$ 15.000</span></div>
-                </div>
+
+            <div class="section">
+                <div class="section-title">🎨 Estética</div>
+                <div class="item" onclick="toggleItem(this, 15000)">Cor Primária <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Cor Secundária <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Cor Farol <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Perolado <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Adesivos <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Neon <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Rodas <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 5000)">Placa <span class="price">$ 5.000</span></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🏎️ Interior & Extras</div>
+                <div class="item" onclick="toggleItem(this, 12000)">Bancos <span class="price">$ 12.000</span></div>
+                <div class="item" onclick="toggleItem(this, 10000)">Som <span class="price">$ 10.000</span></div>
+                <div class="item" onclick="toggleItem(this, 3000)">Fumê <span class="price">$ 3.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Painel <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Volante <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Câmbio <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Porta Malas <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 15000)">Bloco Motor <span class="price">$ 15.000</span></div>
+                <div class="item" onclick="toggleItem(this, 8000)">Buzina <span class="price">$ 8.000</span></div>
             </div>
         </div>
-    </div>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
+    </main>
 
     <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         let player;
         let isPlaying = false;
 
-        // Inicia o player do YouTube
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: '-6hxH80TCp8', // ID da sua música do NFSU2
+                height: '0', width: '0',
+                videoId: '-6hxH80TCp8',
                 playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': '-6hxH80TCp8'
+                    'autoplay': 0, 'controls': 0, 'loop': 1,
+                    'playlist': '-6hxH80TCp8', 'origin': window.location.origin
                 },
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': function(event) { player.setVolume(40); }
                 }
             });
         }
 
-        function onPlayerReady(event) {
-            console.log("Player pronto");
-        }
-
-        function checkPass() {
-            const pass = document.getElementById('passInput').value;
-            if (pass === 'sakurass') {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('calc-content').style.display = 'flex';
-                document.getElementById('audio-control').style.display = 'flex';
-                
-                // Inicia a música ao entrar
-                player.playVideo();
-                player.setVolume(50);
-                isPlaying = true;
-            } else { alert('Chave Incorreta'); }
+        function changeVolume(val) {
+            if(player && player.setVolume) player.setVolume(val);
         }
 
         function toggleAudio() {
@@ -207,38 +256,28 @@
         function toggleItem(el, price) {
             el.classList.toggle('active');
             total = el.classList.contains('active') ? total + price : total - price;
-            updateDisplay();
+            document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`;
         }
 
         function clearAll() {
             total = 0;
             document.querySelectorAll('.item.active').forEach(item => item.classList.remove('active'));
-            updateDisplay();
+            document.getElementById('display-total').innerText = `$ 0`;
         }
 
-        function updateDisplay() {
-            document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`;
-        }
-
-        // Sistema de Pétalas
         function createPetal() {
             const container = document.getElementById('petal-container');
+            if(!container) return;
             const petal = document.createElement('div');
             const size = Math.random() * 8 + 6 + 'px';
-            const startPos = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const fallDuration = Math.random() * 7 + 8;
-            const swayDuration = Math.random() * 4 + 2;
             petal.className = 'petal';
-            petal.style.width = size; petal.style.height = size; petal.style.left = startPos + 'vw'; petal.style.top = '-5%';
-            petal.style.animation = `fall ${fallDuration}s linear forwards, sway ${swayDuration}s ease-in-out infinite`;
-            petal.style.animationDelay = `${delay}s`;
+            petal.style.width = size; petal.style.height = size; 
+            petal.style.left = Math.random() * 100 + 'vw'; petal.style.top = '-5%';
+            petal.style.animation = `fall ${Math.random() * 7 + 8}s linear forwards, sway ${Math.random() * 4 + 2}s ease-in-out infinite`;
             container.appendChild(petal);
-            setTimeout(() => petal.remove(), (fallDuration + delay) * 1000);
+            setTimeout(() => petal.remove(), 12000);
         }
-        setInterval(createPetal, 350);
-
-        document.getElementById('passInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPass(); });
+        setInterval(createPetal, 400);
     </script>
 </body>
 </html>
