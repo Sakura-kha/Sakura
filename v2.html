@@ -84,7 +84,6 @@
         .total-container { position: absolute; right: 50px; text-align: right; }
         #display-total { font-family: 'Orbitron'; font-size: 2.2rem; font-weight: 900; text-shadow: 0 0 15px var(--neon-pink); }
         
-        /* --- BOTÃO LIMPAR MELHORADO --- */
         .btn-clear { 
             background: transparent; 
             color: var(--neon-pink); 
@@ -101,43 +100,20 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
-            transition: all 0.4s ease;
             box-shadow: 0 0 10px rgba(255, 66, 233, 0.2);
-        }
-
-        .btn-clear::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--neon-pink);
-            transition: all 0.4s ease;
-            z-index: -1;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
         }
 
         .btn-clear:hover {
             color: #000;
             box-shadow: 0 0 25px var(--neon-pink);
             transform: scale(1.05);
-        }
-
-        .btn-clear:hover::before {
-            width: 300%;
-            height: 300%;
-        }
-
-        .btn-clear:active {
-            transform: scale(0.95);
+            background: var(--neon-pink);
         }
 
         #calc-content { width: 95vw; max-width: 1800px; margin: 30px auto; padding-bottom: 100px; }
         .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         
-        /* --- ESTILIZAÇÃO MELHORADA DAS CATEGORIAS --- */
+        /* --- CATEGORIAS --- */
         .section { 
             background: var(--glass-bg); 
             backdrop-filter: blur(12px); 
@@ -148,23 +124,24 @@
         }
         
         .section-title { 
-            font-family: 'Orbitron'; 
-            font-size: 1.1rem; 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.2rem; 
             font-weight: 900;
-            letter-spacing: 2px; 
-            margin-bottom: 20px; 
+            letter-spacing: 3px; 
+            margin-bottom: 25px; 
             color: #fff;
             text-transform: uppercase;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(90deg, rgba(255, 66, 233, 0.2), transparent);
-            padding: 10px;
-            border-left: 4px solid var(--neon-pink);
+            background: linear-gradient(90deg, rgba(255, 66, 233, 0.35) 0%, rgba(255, 66, 233, 0.05) 100%);
+            padding: 12px 15px;
+            border-left: 5px solid var(--neon-pink);
             border-radius: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- ESTILIZAÇÃO MELHORADA DOS SERVIÇOS PRINCIPAIS --- */
+        /* --- OS 4 BOTÕES SUPERIORES (EFEITO HOVER ATIVADO) --- */
         .service-box { 
             grid-column: 1 / -1; 
             display: grid; 
@@ -182,48 +159,51 @@
             font-family: 'Orbitron'; 
             color: #fff; 
             text-align: center;
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             gap: 5px;
-            box-shadow: inset 0 0 15px rgba(255, 66, 233, 0.05);
+            transition: all 0.3s ease; /* Garante a animação suave */
+        }
+
+        /* Efeito de passar o mouse nos 4 botões */
+        .service-btn:hover {
+            background: rgba(255, 66, 233, 0.15);
+            border-color: var(--neon-pink);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 66, 233, 0.4);
         }
 
         .service-btn span { font-size: 0.7rem; color: var(--neon-pink); font-weight: bold; }
         .service-btn b { font-size: 1.1rem; letter-spacing: 1px; }
 
-        .service-btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .service-btn:hover { 
-            border-color: var(--neon-pink); 
-            background: rgba(255, 66, 233, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 66, 233, 0.2);
-        }
-        
-        .service-btn:hover::before { left: 100%; }
-
         .service-btn.active { 
-            background: var(--neon-pink); 
-            color: #000; 
-            box-shadow: 0 0 30px var(--neon-pink);
-            border-color: #fff;
+            background: var(--neon-pink) !important; 
+            color: #000 !important; 
+            box-shadow: 0 0 30px var(--neon-pink) !important;
+            border-color: #fff !important;
         }
         .service-btn.active span { color: #000; }
 
-        /* ITENS DA TABELA */
+        /* --- ITENS/PEÇAS (EFEITO HOVER ATIVADO) --- */
         .item { 
             display: flex; justify-content: space-between; align-items: center; 
             background: var(--item-bg); margin-bottom: 10px; padding: 12px 18px; 
             border-radius: 12px; cursor: pointer; font-size: 0.95rem;
             border: 1px solid rgba(255,255,255,0.03);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
         }
-        .item:hover { background: rgba(255, 66, 233, 0.1); border-color: rgba(255, 66, 233, 0.3); }
+
+        /* Efeito de passar o mouse nas peças */
+        .item:hover { 
+            background: rgba(255, 66, 233, 0.2); 
+            border-color: var(--neon-pink);
+            transform: scale(1.02);
+            padding-left: 25px; /* Leve recuo para a direita */
+        }
+
         .item.active { background: var(--neon-pink); color: #000; font-weight: 800; border-color: #fff; }
         .price { font-weight: 700; color: #ffb7f3; }
         .active .price { color: #000; }
@@ -273,19 +253,19 @@
             <div class="service-box">
                 <div class="service-btn" onclick="toggleItem(this, 290000)">
                     <span>TUNAGEM TOTAL</span>
-                    <b>FULL TUNING</b>
+                    <b>FULL TUNING290 k</b>
                 </div>
                 <div class="service-btn" onclick="toggleItem(this, 230000)">
                     <span>TUNAGEM TOTAL</span>
-                    <b>FULL MOTO</b>
+                    <b>FULL MOTO 230k </b>
                 </div>
                 <div class="service-btn" onclick="toggleItem(this, 6000)">
                     <span>SERVIÇO RÁPIDO</span>
-                    <b>REPARO INTERNO</b>
+                    <b>REPARO INTERNO 6k </b>
                 </div>
                 <div class="service-btn" onclick="toggleItem(this, 12000)">
                     <span>SERVIÇO RÁPIDO</span>
-                    <b>REPARO EXTERNO</b>
+                    <b>REPARO EXTERNO 12k</b>
                 </div>
             </div>
 
