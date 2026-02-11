@@ -47,7 +47,6 @@
             text-shadow: 0 0 10px var(--neon-pink);
             display: flex; align-items: center; justify-content: center; gap: 15px;
         }
-
         .login-card h2::before, .login-card h2::after { content: '🌸'; font-size: 1.4rem; }
 
         .login-card input {
@@ -64,7 +63,6 @@
             text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* --- CONTEÚDO PRINCIPAL --- */
         #main-content { display: none; }
 
         header {
@@ -85,130 +83,96 @@
         #display-total { font-family: 'Orbitron'; font-size: 2.2rem; font-weight: 900; text-shadow: 0 0 15px var(--neon-pink); }
         
         .btn-clear { 
-            background: transparent; 
-            color: var(--neon-pink); 
-            border: 2px solid var(--neon-pink); 
-            padding: 8px 22px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            font-size: 0.75rem; 
-            font-family: 'Orbitron'; 
-            font-weight: 900;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(255, 66, 233, 0.2);
+            background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); 
+            padding: 8px 22px; border-radius: 50px; cursor: pointer; font-size: 0.75rem; 
+            font-family: 'Orbitron'; font-weight: 900; margin-top: 8px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .btn-clear:hover {
-            color: #000;
-            box-shadow: 0 0 25px var(--neon-pink);
-            transform: scale(1.05);
-            background: var(--neon-pink);
-        }
+        .btn-clear:hover { color: #000; box-shadow: 0 0 25px var(--neon-pink); transform: scale(1.05); background: var(--neon-pink); }
 
         #calc-content { width: 95vw; max-width: 1800px; margin: 30px auto; padding-bottom: 100px; }
         .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         
-        /* --- CATEGORIAS --- */
         .section { 
-            background: var(--glass-bg); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 66, 233, 0.15); 
-            border-radius: 20px; 
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: var(--glass-bg); backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 66, 233, 0.15); border-radius: 20px; 
+            padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .section-title { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1.2rem; 
-            font-weight: 900;
-            letter-spacing: 3px; 
-            margin-bottom: 25px; 
-            color: #fff;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 900;
+            letter-spacing: 3px; margin-bottom: 25px; color: #fff; text-transform: uppercase;
+            display: flex; align-items: center; justify-content: space-between;
             background: linear-gradient(90deg, rgba(255, 66, 233, 0.35) 0%, rgba(255, 66, 233, 0.05) 100%);
-            padding: 12px 15px;
-            border-left: 5px solid var(--neon-pink);
-            border-radius: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 12px 15px; border-left: 5px solid var(--neon-pink); border-radius: 4px;
         }
 
-        /* --- OS 4 BOTÕES SUPERIORES (EFEITO HOVER ATIVADO) --- */
         .service-box { 
             grid-column: 1 / -1; 
             display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
             gap: 20px; 
-            margin-bottom: 35px; 
+            margin-bottom: 10px; 
         }
 
         .service-btn { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 66, 233, 0.4); 
-            padding: 20px; 
-            border-radius: 15px; 
-            cursor: pointer; 
-            font-family: 'Orbitron'; 
-            color: #fff; 
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            transition: all 0.3s ease; /* Garante a animação suave */
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 66, 233, 0.4); 
+            padding: 20px; border-radius: 15px; cursor: pointer; font-family: 'Orbitron'; 
+            color: #fff; text-align: center; display: flex; flex-direction: column; gap: 5px;
+            position: relative;
         }
 
-        /* Efeito de passar o mouse nos 4 botões */
-        .service-btn:hover {
-            background: rgba(255, 66, 233, 0.15);
-            border-color: var(--neon-pink);
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 66, 233, 0.4);
-        }
+        .service-btn:hover { background: rgba(255, 66, 233, 0.15); border-color: var(--neon-pink); transform: translateY(-5px); box-shadow: 0 0 20px rgba(255, 66, 233, 0.4); }
 
         .service-btn span { font-size: 0.7rem; color: var(--neon-pink); font-weight: bold; }
         .service-btn b { font-size: 1.1rem; letter-spacing: 1px; }
 
-        .service-btn.active { 
-            background: var(--neon-pink) !important; 
-            color: #000 !important; 
-            box-shadow: 0 0 30px var(--neon-pink) !important;
-            border-color: #fff !important;
-        }
+        .service-btn.active { background: var(--neon-pink) !important; color: #000 !important; box-shadow: 0 0 30px var(--neon-pink) !important; border-color: #fff !important; }
         .service-btn.active span { color: #000; }
 
-        /* --- ITENS/PEÇAS (EFEITO HOVER ATIVADO) --- */
+        /* ESTILOS DOS BOTÕES DE EXTRAS */
+        .extra-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+            margin-top: 10px;
+        }
+
+        .btn-math {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--neon-pink);
+            color: white;
+            border-radius: 8px;
+            width: 40px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .btn-math:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
+        .active .btn-math { border-color: #000; color: #000; }
+        .active .btn-math:hover { background: #000; color: #fff; }
+
+        /* RESTO DOS ESTILOS */
         .item { 
             display: flex; justify-content: space-between; align-items: center; 
             background: var(--item-bg); margin-bottom: 10px; padding: 12px 18px; 
-            border-radius: 12px; cursor: pointer; font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.03);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
+            border-radius: 12px; cursor: pointer; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.03);
+            font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        /* Efeito de passar o mouse nas peças */
-        .item:hover { 
-            background: rgba(255, 66, 233, 0.2); 
-            border-color: var(--neon-pink);
-            transform: scale(1.02);
-            padding-left: 25px; /* Leve recuo para a direita */
-        }
-
+        .item:hover { background: rgba(255, 66, 233, 0.2); border-color: var(--neon-pink); transform: scale(1.02); padding-left: 25px; }
         .item.active { background: var(--neon-pink); color: #000; font-weight: 800; border-color: #fff; }
         .price { font-weight: 700; color: #ffb7f3; }
         .active .price { color: #000; }
 
-        /* FUNDO E PÉTALAS */
         .bg-image { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.6; }
         .bg-overlay { position: fixed; inset: 0; background: radial-gradient(circle, transparent 20%, #000 120%); z-index: -1; }
         #petal-container { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
@@ -222,7 +186,6 @@
             header { flex-direction: column; height: auto; padding: 20px; }
             .total-container { position: static; margin-top: 15px; }
         }
-
     </style>
 </head>
 <body>
@@ -266,6 +229,14 @@
                 <div class="service-btn" onclick="toggleItem(this, 12000)">
                     <span>SERVIÇO RÁPIDO</span>
                     <b>REPARO EXTERNO 12k</b>
+                </div>
+                <div class="service-btn" id="extra-btn">
+                    <span>ADICIONAIS (3k cada)</span>
+                    <b id="extra-label">EXTRAS: $ 0</b>
+                    <div class="extra-controls">
+                        <div class="btn-math" onclick="updateExtra(-3000)">-</div>
+                        <div class="btn-math" onclick="updateExtra(3000)">+</div>
+                    </div>
                 </div>
             </div>
 
@@ -328,6 +299,9 @@
     </div>
 
     <script>
+        let total = 0;
+        let extraAcumulado = 0;
+
         function checkLogin() {
             const pass = document.getElementById('password-input').value;
             if (pass === 'sakurass') {
@@ -338,20 +312,44 @@
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
+
         function handleEnter(e) { if (e.key === 'Enter') checkLogin(); }
 
-        let total = 0;
         function toggleItem(el, price) {
             el.classList.toggle('active');
             if (el.classList.contains('active')) { total += price; } 
             else { total -= price; }
+            atualizarTotalVisor();
+        }
+
+        // FUNÇÃO DE EXTRA ÚNICA E INTUITIVA
+        function updateExtra(valor) {
+            if (valor < 0 && extraAcumulado <= 0) return;
+            
+            extraAcumulado += valor;
+            total += valor;
+            
+            const label = document.getElementById('extra-label');
+            const btn = document.getElementById('extra-btn');
+            
+            label.innerText = `EXTRAS: $ ${extraAcumulado.toLocaleString('pt-BR')}`;
+            
+            if (extraAcumulado > 0) { btn.classList.add('active'); } 
+            else { btn.classList.remove('active'); }
+            
+            atualizarTotalVisor();
+        }
+
+        function atualizarTotalVisor() {
             document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`;
         }
 
         function clearAll() {
             total = 0;
+            extraAcumulado = 0;
             document.querySelectorAll('.item.active, .service-btn.active').forEach(i => i.classList.remove('active'));
-            document.getElementById('display-total').innerText = `$ 0`;
+            document.getElementById('extra-label').innerText = `EXTRAS: $ 0`;
+            atualizarTotalVisor();
         }
 
         function createPetal() {
