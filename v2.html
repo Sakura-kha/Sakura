@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAKURA MECÂNICA V11 - SUPREME FINAL</title>
     <style>
-        /* ================================================================
-           ESTILIZAÇÃO DE ALTO IMPACTO (CSS)
-           ================================================================
-        */
         :root {
             --neon-pink: #ff42e9;
             --hot-pink: #ff007f;
@@ -36,14 +32,12 @@
             min-height: 100vh;
         }
 
-        /* EFEITO DE BRILHO AO PASSAR O MOUSE */
         .glow-hover:hover {
             box-shadow: 0 0 20px var(--neon-pink);
             transform: translateY(-3px);
             border-color: var(--neon-pink);
         }
 
-        /* BARRA DE ROLAGEM SAKURA */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { 
@@ -51,7 +45,6 @@
             border-radius: 10px;
         }
 
-        /* CANVAS DE PÉTALAS */
         .sakura-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -74,10 +67,6 @@
             100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
         }
 
-        /* ================================================================
-           CABEÇALHO NEON (DESIGN DA IMAGEM)
-           ================================================================
-        */
         header {
             padding: 20px 50px;
             background: var(--header-bg);
@@ -89,88 +78,42 @@
             box-shadow: 0 5px 30px rgba(255, 66, 233, 0.4);
         }
 
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .sakura-icon-fixed {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 10px var(--neon-pink));
-        }
-
+        .header-brand { display: flex; align-items: center; gap: 15px; }
+        .sakura-icon-fixed { font-size: 2rem; filter: drop-shadow(0 0 10px var(--neon-pink)); }
+        
         .brand-text {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 5px;
+            font-size: 2.2rem; font-weight: 900; color: #fff;
+            text-transform: uppercase; letter-spacing: 5px;
             text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
             animation: pulse-neon 2s infinite ease-in-out;
         }
 
         @keyframes pulse-neon {
             0%, 100% { opacity: 1; filter: brightness(1); }
-            50% { opacity: 0.8; filter: brightness(1.3); }
+            50% { opacity: 0.8; filter: brightness(1.3); text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink); }
         }
 
-        .search-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            padding: 0 50px;
-        }
-
+        .search-container { flex: 1; display: flex; justify-content: center; padding: 0 50px; }
         .header-search {
-            width: 100%;
-            max-width: 350px;
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
+            width: 100%; max-width: 350px; padding: 12px 25px;
+            background: rgba(255,255,255,0.07); border: 1px solid var(--glass-border);
+            border-radius: 50px; color: #fff; font-size: 0.95rem; outline: none;
         }
+        .header-search:focus { border-color: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); }
 
-        .header-search:focus {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .total-box {
-            text-align: right;
-            min-width: 250px;
-        }
-
+        .total-box { text-align: right; min-width: 250px; }
         .total-label { font-size: 0.75rem; color: var(--neon-pink); text-transform: uppercase; font-weight: bold; }
         #grand-total { font-size: 2.8rem; font-weight: 900; color: #fff; }
 
-        /* ================================================================
-           LOGIN & NAV
-           ================================================================
-        */
         #login-overlay {
-            position: fixed; inset: 0;
-            background: #000;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
+            position: fixed; inset: 0; background: #000;
+            display: flex; justify-content: center; align-items: center; z-index: 10000;
         }
 
         .login-card {
-            background: var(--card-bg);
-            padding: 50px; border-radius: 30px;
-            border: 2px solid var(--neon-pink);
-            text-align: center; width: 400px;
+            background: var(--card-bg); padding: 50px; border-radius: 30px;
+            border: 2px solid var(--neon-pink); text-align: center; width: 400px;
             box-shadow: 0 0 50px rgba(255, 66, 233, 0.4);
-        }
-
-        .login-card h2 { color: var(--neon-pink); margin-bottom: 30px; letter-spacing: 3px; }
-        .login-card input {
-            width: 100%; padding: 15px; margin-bottom: 25px;
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-            border-radius: 12px; color: #fff; text-align: center;
         }
 
         .nav-tabs { display: flex; justify-content: center; gap: 20px; padding: 40px 0; }
@@ -181,79 +124,46 @@
         }
         .tab-btn.active { background: var(--neon-pink); color: #000; box-shadow: 0 0 20px var(--neon-pink); }
 
-        /* ================================================================
-           GRID DE PEÇAS E AÇÕES
-           ================================================================
-        */
         .main-container { max-width: 1600px; margin: 0 auto; padding: 0 40px 100px; }
 
-        .quick-actions {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 20px; margin-bottom: 20px;
-        }
-
-        .secondary-actions {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 20px; margin-bottom: 40px;
-        }
-
-        .btn-toggle {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            padding: 30px; border-radius: 20px;
-            color: #fff; font-weight: 900; cursor: pointer; text-align: center;
-        }
-        .btn-toggle.active { background: var(--neon-pink); color: #000; border-color: #fff; }
-
-        .btn-infinite {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
-            border: none; padding: 30px; border-radius: 20px;
-            color: #000; font-weight: 900; font-size: 1.2rem; cursor: pointer;
-        }
-
-        .btn-utility {
-            background: rgba(0, 242, 255, 0.05);
-            border: 1px solid var(--neon-blue);
-            padding: 20px; border-radius: 15px;
-            color: #fff; font-weight: 800; cursor: pointer; text-align: center;
-        }
-        .btn-utility.active { background: var(--neon-blue); color: #000; }
-
-        .parts-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;
-        }
-
-        .category-box {
-            background: var(--card-bg); border: 1px solid var(--glass-border);
-            border-radius: 25px; padding: 25px;
-        }
-
+        .parts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .category-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 25px; padding: 25px; }
         .category-box h3 {
-            font-size: 0.85rem; color: var(--neon-pink);
-            border-bottom: 2px solid var(--neon-pink);
+            font-size: 0.85rem; color: var(--neon-pink); border-bottom: 2px solid var(--neon-pink);
             padding-bottom: 15px; margin-bottom: 20px; text-transform: uppercase;
         }
 
         .part-item {
-            display: flex; justify-content: space-between;
-            padding: 12px; background: rgba(255,255,255,0.03);
-            margin-bottom: 8px; border-radius: 10px; cursor: pointer;
-            font-size: 0.85rem; font-weight: 600;
+            display: flex; justify-content: space-between; padding: 12px;
+            background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 10px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 600;
         }
         .part-item.selected { background: var(--neon-pink); color: #000; font-weight: 900; }
-        .part-item:hover:not(.selected) { background: rgba(255, 66, 233, 0.1); }
 
-        .car-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 20px; overflow: hidden; }
-        .car-table th { padding: 20px; color: var(--neon-pink); text-align: left; border-bottom: 2px solid var(--neon-pink); }
-        .car-row td { padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .car-price { color: var(--success); text-align: right; font-weight: 900; }
+        #car-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .car-card {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            padding: 15px; border-radius: 12px; display: flex;
+            justify-content: space-between; font-weight: bold; font-size: 0.85rem;
+        }
+        .car-card .car-price { color: var(--success); }
+
+        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px; }
+        .secondary-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+
+        .btn-toggle, .btn-utility, .btn-infinite {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border);
+            padding: 30px; border-radius: 20px; color: #fff; font-weight: 900; cursor: pointer; text-align: center;
+        }
+        .btn-toggle.active { background: var(--neon-pink); color: #000; }
+        .btn-utility { border-color: var(--neon-blue); }
+        .btn-utility.active { background: var(--neon-blue); color: #000; }
+        .btn-infinite { background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue)); color: #000; border: none; }
 
         .reset-fab {
-            position: fixed; bottom: 40px; right: 40px;
-            width: 80px; height: 80px; border-radius: 50%;
-            background: #fff; color: #000; border: none; font-weight: 900; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 2000;
+            position: fixed; bottom: 40px; right: 40px; width: 80px; height: 80px;
+            border-radius: 50%; background: #fff; color: #000; border: none;
+            font-weight: 900; cursor: pointer; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -263,9 +173,9 @@
 
     <div id="login-overlay">
         <div class="login-card">
-            <h2>ACESSO RESTRITO</h2>
-            <input type="password" id="pass-field" placeholder="SENHA DO SISTEMA">
-            <button class="btn-infinite" onclick="validateLogin()" style="width: 100%; padding: 15px;">ENTRAR</button>
+            <h2 style="color: var(--neon-pink); margin-bottom: 20px; letter-spacing: 3px;">ACESSO RESTRITO</h2>
+            <input type="password" id="pass-field" style="width: 100%; padding: 15px; margin-bottom: 20px; background: #111; border: 1px solid var(--neon-pink); color: white; border-radius: 10px; text-align: center;" placeholder="SENHA DO SISTEMA" onkeypress="handleLoginKey(event)">
+            <button class="btn-infinite glow-hover" onclick="validateLogin()" style="width: 100%; padding: 15px;">ENTRAR</button>
         </div>
     </div>
 
@@ -276,11 +186,9 @@
                 <h1 class="brand-text">Sakura Mecânica</h1>
                 <span class="sakura-icon-fixed">🌸</span>
             </div>
-
             <div class="search-container">
                 <input type="text" id="global-search" class="header-search" placeholder="🔍 Buscar peça ou veículo..." onkeyup="filterAll()">
             </div>
-
             <div class="total-box">
                 <div class="total-label">Total do Orçamento</div>
                 <div id="grand-total">$ 0</div>
@@ -288,24 +196,23 @@
         </header>
 
         <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab(this, 'calc')">CALCULADORA DA MECÂNICA</button>
-            <button class="tab-btn" onclick="switchTab(this, 'cars')">CATÁLOGO DE VALORES DOS CARROS </button>
+            <button class="tab-btn active" onclick="switchTab(this, 'calc')">CALCULADORA</button>
+            <button class="tab-btn" onclick="switchTab(this, 'cars')">CATÁLOGO DE VALORES</button>
         </nav>
 
         <div class="main-container">
-            
             <div id="calc-tab">
                 <div class="quick-actions">
-                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 290000)">FULL TUNNING (290.000)</div>
-                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 230000)">FULL TUNNING (230.000)</div>
-                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 15000)">Kit reparo (15.000)</div>
-                    <div class="btn-infinite glow-hover" onclick="addInfinite(3000)">EXTRAS +3.000</div>
+                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 290000)">FULL TUNNING (290k)</div>
+                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 230000)">FULL TUNNING (230k)</div>
+                    <div class="btn-toggle glow-hover" onclick="toggleQuick(this, 15000)">KIT REPARO (15k)</div>
+                    <div class="btn-infinite glow-hover" onclick="addInfinite(3000)">EXTRAS +3k</div>
                 </div>
 
                 <div class="secondary-actions">
-                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 6000)">REPARO INTERNO (6.000)</div>
-                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 12000)">REPARO EXTERNO (12.000)</div>
-                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 10000)">VALOR PNEU (10.000)</div>
+                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 6000)">REPARO INTERNO (6k)</div>
+                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 12000)">REPARO EXTERNO (12k)</div>
+                    <div class="btn-utility glow-hover" onclick="toggleQuick(this, 15000)">PNEU (15k)</div>
                 </div>
 
                 <div class="parts-grid">
@@ -397,81 +304,115 @@
             </div>
 
             <div id="cars-tab" style="display: none;">
-                <table class="car-table">
-                    <thead><tr><th>MODELO</th><th style="text-align: right;">VALOR</th></tr></thead>
-                    <tbody id="car-list">
-                        <tr class="car-row"><td>BABYR8</td><td class="car-price">$800.000</td></tr>
-                        <tr class="car-row"><td>BISON</td><td class="car-price">$300.000</td></tr>
-                        <tr class="car-row"><td>BRIOSO</td><td class="car-price">$400.000</td></tr>
-                        <tr class="car-row"><td>DOMINATOR</td><td class="car-price">$650.000</td></tr>
-                        <tr class="car-row"><td>ENTITY3</td><td class="car-price">$500.000</td></tr>
-                        <tr class="car-row"><td>FURIA</td><td class="car-price">$900.000</td></tr>
-                        <tr class="car-row"><td>T20</td><td class="car-price">$900.000</td></tr>
-                        <tr class="car-row"><td>ZENTORNO</td><td class="car-price">$900.000</td></tr>
-                        <tr class="car-row"><td>PCX</td><td class="car-price">$900.000</td></tr>
-                        <tr class="car-row"><td>FATBOY</td><td class="car-price">$700.000</td></tr>
-                        <tr class="car-row"><td>BATI2</td><td class="car-price">$550.000</td></tr>
-                        <tr class="car-row"><td>GTR R35</td><td class="car-price">$1.200.000</td></tr>
-                        <tr class="car-row"><td>CHIRON</td><td class="car-price">$3.500.000</td></tr>
-                        <tr class="car-row"><td>AVENTADOR</td><td class="car-price">$2.100.000</td></tr>
-                        <tr class="car-row"><td>PORSCHE 911</td><td class="car-price">$1.500.000</td></tr>
-                    </tbody>
-                </table>
+                <div id="car-list">
+                    <div class="car-card"><span>BABYR8</span><span class="car-price">$800k</span></div>
+                    <div class="car-card"><span>BISON</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>BRIOSO</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>CARBONIZZARE</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>DOMINATOR</span><span class="car-price">$650k</span></div>
+                    <div class="car-card"><span>ELEGY2</span><span class="car-price">$800k</span></div>
+                    <div class="car-card"><span>ENTITY2</span><span class="car-price">$450k</span></div>
+                    <div class="car-card"><span>ENTITY3</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>EUDORA</span><span class="car-price">$550k</span></div>
+                    <div class="car-card"><span>EVERON2</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>FD</span><span class="car-price">$850k</span></div>
+                    <div class="car-card"><span>FLASHGT</span><span class="car-price">$450k</span></div>
+                    <div class="car-card"><span>FURIA</span><span class="car-price">$900k</span></div>
+                    <div class="car-card"><span>ISSI8</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>JUGULAR</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>MESA3</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>NEON</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>OPENWHEEL2</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>PANTHERE</span><span class="car-price">$450k</span></div>
+                    <div class="car-card"><span>RUSTON</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>SULTAN3</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>SURFER3</span><span class="car-price">$350k</span></div>
+                    <div class="car-card"><span>T20</span><span class="car-price">$900k</span></div>
+                    <div class="car-card"><span>TAHOMA</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>TAMPA2</span><span class="car-price">$1.8M</span></div>
+                    <div class="car-card"><span>TULIP2</span><span class="car-price">$350k</span></div>
+                    <div class="car-card"><span>TYRUS</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>VAGNER</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>VIRTUE</span><span class="car-price">$450k</span></div>
+                    <div class="car-card"><span>WEEVIL</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>WINDSOR</span><span class="car-price">$400k</span></div>
+                    <div class="car-card"><span>ZENTORNO</span><span class="car-price">$900k</span></div>
+                    <div class="car-card"><span>ZORRUSSO</span><span class="car-price">$650k</span></div>
+                    <div class="car-card"><span>AKUMA</span><span class="car-price">$250k</span></div>
+                    <div class="car-card"><span>BATI2</span><span class="car-price">$550k</span></div>
+                    <div class="car-card"><span>CHIMERA</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>F4RR</span><span class="car-price">$600k</span></div>
+                    <div class="car-card"><span>MANCHEZ3</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>POWERSURGE</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>RATBIKE</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>RROCKET</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>SANCTUS</span><span class="car-price">$300k</span></div>
+                    <div class="car-card"><span>VORTEX</span><span class="car-price">$350k</span></div>
+                    <div class="car-card"><span>BABYBMX</span><span class="car-price">$650k</span></div>
+                    <div class="car-card"><span>BF400</span><span class="car-price">$650k</span></div>
+                    <div class="car-card"><span>BS17</span><span class="car-price">$850k</span></div>
+                    <div class="car-card"><span>CARBONRS</span><span class="car-price">$750k</span></div>
+                    <div class="car-card"><span>FAGGIO2</span><span class="car-price">$500k</span></div>
+                    <div class="car-card"><span>FATBOY</span><span class="car-price">$700k</span></div>
+                    <div class="car-card"><span>PCX</span><span class="car-price">$900k</span></div>
+                </div>
             </div>
         </div>
 
-        <button class="reset-fab" onclick="resetSystem()">Apagar tudo</button>
+        <button class="reset-fab" onclick="resetSystem()">APAGAR TUDO</button>
     </div>
 
     <script>
         let grandTotal = 0;
 
-        document.getElementById('pass-field').addEventListener('keypress', (e) => { if(e.key === 'Enter') validateLogin(); });
+        function handleLoginKey(e) { if (e.key === 'Enter') validateLogin(); }
 
         function validateLogin() {
             if(document.getElementById('pass-field').value === 'sakurass') {
                 document.getElementById('login-overlay').style.display = 'none';
                 document.getElementById('app-content').style.display = 'block';
                 startSakura();
-            } else { alert('Acesso Negado'); }
+            } else { alert('Senha Incorreta!'); }
         }
 
         function filterAll() {
             const query = document.getElementById('global-search').value.toLowerCase();
-            document.querySelectorAll('.part-item').forEach(i => i.style.display = i.innerText.toLowerCase().includes(query) ? "flex" : "none");
-            document.querySelectorAll('.car-row').forEach(r => r.style.display = r.innerText.toLowerCase().includes(query) ? "" : "none");
+            document.querySelectorAll('.part-item').forEach(i => {
+                i.style.display = i.innerText.toLowerCase().includes(query) ? "flex" : "none";
+            });
+            document.querySelectorAll('.category-box').forEach(box => {
+                const hasVisible = Array.from(box.querySelectorAll('.part-item')).some(item => item.style.display === "flex");
+                box.style.display = hasVisible ? "block" : "none";
+            });
+            document.querySelectorAll('.car-card').forEach(c => {
+                c.style.display = c.innerText.toLowerCase().includes(query) ? "flex" : "none";
+            });
         }
 
         function addInfinite(v) { grandTotal += v; updateDisplay(); }
-        
         function toggleQuick(el, v) {
             el.classList.toggle('active');
             grandTotal += el.classList.contains('active') ? v : -v;
             updateDisplay();
         }
-
         function togglePart(el, v) {
             el.classList.toggle('selected');
             grandTotal += el.classList.contains('selected') ? v : -v;
             updateDisplay();
         }
-
         function updateDisplay() {
             document.getElementById('grand-total').innerText = `$ ${grandTotal.toLocaleString('pt-BR')}`;
         }
-
         function resetSystem() {
             grandTotal = 0; updateDisplay();
             document.querySelectorAll('.part-item, .btn-toggle, .btn-utility').forEach(i => i.classList.remove('selected', 'active'));
         }
-
         function switchTab(btn, t) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             document.getElementById('calc-tab').style.display = t === 'calc' ? 'block' : 'none';
             document.getElementById('cars-tab').style.display = t === 'cars' ? 'block' : 'none';
         }
-
         function startSakura() {
             const box = document.getElementById('sakura-box');
             for(let i=0; i<45; i++) {
