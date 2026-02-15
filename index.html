@@ -5,10 +5,10 @@
     <title>Calculado Sakura Custom</title>
     <style>
         :root {
-            --bg-grad: linear-gradient(180deg, #7ba4ce 0%, #e0f0ff 100%);
-            --dark-panel: rgba(26, 31, 37, 0.85);
-            --item-bg: #1a1a1a;
-            --accent-green: #2ecc71;
+            --bg-grad: linear-gradient(180deg, #070107 0%, #4e024a 100%);
+            --dark-panel: rgba(252, 3, 190, 0.082);
+            --item-bg: #030000;
+            --accent-green: #fcf9fb;
             --konoha-blue: #5d7fa3;
         }
 
@@ -17,7 +17,7 @@
             background: var(--bg-grad);
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: #fd02f1;
         }
 
         .header-title {
@@ -26,7 +26,7 @@
             font-style: italic;
             color: var(--konoha-blue);
             text-transform: uppercase;
-            text-shadow: 2px 2px 0px #fff;
+            text-shadow: 2px 2px 0px #fa03d1;
             margin-bottom: 30px;
         }
 
@@ -39,8 +39,8 @@
         }
 
         .section {
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px solid #fff;
+            background: rgb(8, 0, 0);
+            border: 2px solid #fd02f1;
             border-radius: 15px;
             padding: 15px;
         }
@@ -48,7 +48,7 @@
         h2 {
             text-align: center;
             font-size: 22px;
-            color: #1a3a5a;
+            color: #fd02f1;
             margin-top: 0;
             border-bottom: 2px solid #fff;
             padding-bottom: 10px;
@@ -60,16 +60,16 @@
             border-collapse: collapse;
         }
         .tunnagem-table th { font-size: 12px; text-transform: uppercase; }
-        .row-item { display: flex; align-items: center; gap: 10px; background: var(--item-bg); color: white; padding: 5px 10px; border-radius: 5px; margin-bottom: 5px; }
-        .row-item img { width: 30px; height: 30px; }
+        .row-item { display: flex; align-items: center; gap: 10px; background: var(--item-bg); color: #fd02f1; padding: 5px 10px; border-radius: 5px; margin-bottom: 5px; }
+        .row-item img { width: 75px; height: 75px; }
         
         .btn-price {
-            background: #333; color: #fff; border: 1px solid #444;
+            background: #030000; color: #fd02f1; border: 1px solid #414040;
             padding: 8px 5px; cursor: pointer; border-radius: 4px; width: 100%;
             font-weight: bold; font-size: 13px; transition: 0.2s;
         }
-        .btn-price:hover { background: #444; }
-        .btn-price.active { background: var(--accent-green); border-color: #fff; }
+        .btn-price:hover { background: #ff82f9; }
+        .btn-price.active { background: var(--accent-green); border-color: #fc02ef; }
 
         /* Grid de Peças (Estilo Icone) */
         .items-container {
@@ -90,9 +90,9 @@
         }
         .card:hover { transform: translateY(-3px); }
         .card.active { border-color: var(--accent-green); background: #002b00; }
-        .card img { width: 45px; height: 45px; object-fit: contain; }
+        .card img { width: 75px; height: 75px; object-fit: contain; }
         .card .name { display: block; font-size: 10px; text-transform: uppercase; margin: 5px 0; font-weight: bold; }
-        .card .price { display: block; color: #f1c40f; font-size: 13px; font-weight: bold; }
+        .card .price { display: block; color: #f804c3; font-size: 13px; font-weight: bold; }
 
         /* Rodapé de Totais */
         .footer-info {
@@ -108,15 +108,15 @@
         }
 
         .full-prices { font-size: 18px; line-height: 1.6; }
-        .full-prices span { color: #ff4d4d; font-weight: bold; font-size: 24px; }
+        .full-prices span { color: #faf9f9; font-weight: bold; font-size: 24px; }
 
         .total-display {
-            background: #c0392b;
+            background: #ff66f7;
             padding: 15px 40px;
             border-radius: 10px;
             font-size: 30px;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgb(252, 1, 218);
         }
     </style>
 </head>
@@ -207,7 +207,7 @@
                 <h2>EMBELEZAMENTO EXTERNO</h2>
                 <div class="items-container">
                     <div class="card" onclick="togglePrice(this, 8000)">
-                        <img src="https://cdn.discordapp.com/attachments/1472491848751910995/1472503605654323344/Screenshot_17.png?ex=6992cf59&is=69917dd9&hm=71fb3030a8ca297dbd26d929faf0a819886d5046e62cf9b7b01bea9c8d7fc18c&">
+                        <img src="https://cdn.discordapp.com/attachments/1472491848751910995/1472554681069862975/Your_paragraph_text_1.png?ex=6992feea&is=6991ad6a&hm=29200f03af75dbf32cb4b60305306109719f8f1785dbde408db4fd706c74c704&">
                         <span class="name">Aerofólio</span>
                         <span class="price">8.000</span>
                     </div>
@@ -292,6 +292,5 @@
     </script>
 </body>
 </html>
-
 
 
