@@ -2,241 +2,268 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKURA MECÂNICA | PRO DASHBOARD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <title>Calculadora Mecânica Konoha</title>
     <style>
         :root {
-            --pink: #ff00e5;
-            --pink-glow: rgba(255, 0, 229, 0.6);
-            --glass: rgba(255, 255, 255, 0.07);
-            --bg: #030303;
+            --bg-grad: linear-gradient(180deg, #7ba4ce 0%, #e0f0ff 100%);
+            --dark-panel: rgba(26, 31, 37, 0.85);
+            --item-bg: #1a1a1a;
+            --accent-green: #2ecc71;
+            --konoha-blue: #5d7fa3;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-grad);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .header-title {
+            text-align: center;
+            font-size: 45px;
+            font-style: italic;
+            color: var(--konoha-blue);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #fff;
+            margin-bottom: 30px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #fff;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            color: #1a3a5a;
+            margin-top: 0;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        /* Tabela de Tunnagem */
+        .tunnagem-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .tunnagem-table th { font-size: 12px; text-transform: uppercase; }
+        .row-item { display: flex; align-items: center; gap: 10px; background: var(--item-bg); color: white; padding: 5px 10px; border-radius: 5px; margin-bottom: 5px; }
+        .row-item img { width: 30px; height: 30px; }
         
-        body { 
-            background: var(--bg); 
-            background-image: radial-gradient(circle at 50% -20%, rgba(255, 0, 229, 0.25) 0%, transparent 50%);
-            color: #fff; height: 100vh; overflow: hidden; display: flex; flex-direction: column; 
+        .btn-price {
+            background: #333; color: #fff; border: 1px solid #444;
+            padding: 8px 5px; cursor: pointer; border-radius: 4px; width: 100%;
+            font-weight: bold; font-size: 13px; transition: 0.2s;
+        }
+        .btn-price:hover { background: #444; }
+        .btn-price.active { background: var(--accent-green); border-color: #fff; }
+
+        /* Grid de Peças (Estilo Icone) */
+        .items-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px;
         }
 
-        header { 
-            display: flex; flex-direction: column; align-items: center; gap: 15px;
-            padding: 20px 50px; background: rgba(0,0,0,0.85); border-bottom: 3px solid var(--pink);
-            backdrop-filter: blur(20px); z-index: 100; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        .card {
+            background: var(--item-bg);
+            color: white;
+            padding: 10px 5px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: 0.2s;
         }
-        
-        .brand { 
-            font-family: 'Montserrat', sans-serif; font-size: 3.2rem; font-weight: 900; letter-spacing: 10px;
-            background: linear-gradient(to right, #fff 20%, var(--pink) 50%, #fff 80%);
-            background-size: 200% auto; color: #fff; background-clip: text; -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; text-transform: uppercase;
-            filter: drop-shadow(0 0 20px var(--pink-glow));
-        }
-        @keyframes shine { to { background-position: 200% center; } }
+        .card:hover { transform: translateY(-3px); }
+        .card.active { border-color: var(--accent-green); background: #002b00; }
+        .card img { width: 45px; height: 45px; object-fit: contain; }
+        .card .name { display: block; font-size: 10px; text-transform: uppercase; margin: 5px 0; font-weight: bold; }
+        .card .price { display: block; color: #f1c40f; font-size: 13px; font-weight: bold; }
 
-        .header-controls { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1800px; }
-        .search-bar { width: 500px; }
-        .search-bar input { 
-            width: 100%; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); 
-            padding: 15px 30px; border-radius: 40px; color: #fff; outline: none; transition: 0.3s; font-size: 1.1rem;
-        }
-        .search-bar input:focus { border-color: var(--pink); box-shadow: 0 0 15px var(--pink-glow); }
-
-        nav { display: flex; gap: 40px; }
-        nav button { 
-            background: transparent; border: none; color: #888; cursor: pointer; 
-            font-weight: 800; text-transform: uppercase; font-size: 1.2rem; transition: 0.3s;
-        }
-        nav button.active { color: var(--pink); text-shadow: 0 0 10px var(--pink-glow); border-bottom: 4px solid var(--pink); }
-
-        .main-content { padding: 20px 50px; flex-grow: 1; overflow-y: auto; display: none; }
-        .main-content.active { display: block; }
-
-        /* PAINEL DE BOTÕES MELHORADO */
-        .top-panel {
-            display: flex; flex-direction: column; align-items: center; gap: 25px;
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 35px;
-            border-radius: 30px; margin-bottom: 30px; max-width: 1800px; margin-left: auto; margin-right: auto;
-            backdrop-filter: blur(10px);
+        /* Rodapé de Totais */
+        .footer-info {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark-panel);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
         }
 
-        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        
-        .btn { 
-            min-width: 200px; padding: 18px; border-radius: 18px; border: 2px solid rgba(255,255,255,0.15); 
-            font-weight: 800; text-transform: uppercase; font-size: 1.1rem; cursor: pointer; 
-            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            color: #fff; display: flex; flex-direction: column; align-items: center; gap: 8px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        .btn:hover { border-color: var(--pink); transform: translateY(-5px); box-shadow: 0 15px 25px rgba(255, 0, 229, 0.2); }
+        .full-prices { font-size: 18px; line-height: 1.6; }
+        .full-prices span { color: #ff4d4d; font-weight: bold; font-size: 24px; }
 
-        /* PREÇO DENTRO DO BOTÃO */
-        .btn b { 
-            font-family: 'Roboto Mono', monospace; font-size: 1.4rem; color: var(--pink); 
-            text-shadow: 0 0 10px var(--pink-glow);
+        .total-display {
+            background: #c0392b;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
-        .btn.selected { 
-            background: var(--pink); border-color: #fff; color: #000; 
-            box-shadow: 0 0 30px var(--pink-glow); transform: scale(1.05);
-        }
-        .btn.selected b { color: #000; text-shadow: none; }
-
-        .btn-clear { 
-            border-color: #ff3333; color: #ff3333; background: rgba(255, 51, 51, 0.05); 
-            justify-content: center; min-width: 150px;
-        }
-        .btn-clear:hover { background: #ff3333; color: #fff; }
-
-        /* DISPLAY DE TOTAL */
-        .total-display-box {
-            background: #000; padding: 15px 80px; border-radius: 20px; 
-            border: 2px solid var(--pink); box-shadow: inset 0 0 20px var(--pink-glow);
-        }
-        .total-val { font-family: 'Roboto Mono', monospace; font-size: 5.5rem; color: #fff; text-shadow: 0 0 30px var(--pink); line-height: 1; }
-
-        /* GRID */
-        .parts-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1800px; margin: 0 auto; }
-        .category { background: rgba(0,0,0,0.5); padding: 22px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .category h3 { font-size: 1rem; text-transform: uppercase; color: var(--pink); margin-bottom: 15px; border-bottom: 2px solid var(--pink); padding-bottom: 10px; letter-spacing: 2px; }
-        
-        .item { 
-            display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; 
-            background: rgba(255,255,255,0.04); margin-bottom: 10px; border-radius: 12px; 
-            cursor: pointer; font-size: 1.05rem; transition: 0.2s;
-        }
-        .item:hover { background: rgba(255,255,255,0.12); transform: translateX(5px); }
-        .item.selected { background: var(--pink); color: #000; font-weight: 900; }
-        
-        .p-val { font-family: 'Roboto Mono', monospace; font-size: 1.2rem; font-weight: 800; color: #fff; }
-        .selected .p-val { color: #000; }
-
-        .venda-container { max-width: 1700px; margin: 0 auto; column-count: 3; column-gap: 30px; }
-        .v-row { display: flex; justify-content: space-between; padding: 15px 25px; background: var(--glass); margin-bottom: 10px; border-radius: 12px; font-size: 1.2rem; break-inside: avoid; border: 1px solid rgba(255,255,255,0.05); }
-        .v-row span:last-child { color: var(--pink); font-family: 'Roboto Mono', monospace; font-weight: 900; font-size: 1.3rem; }
-
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand">SAKURA MECÂNICA</div>
-        <div class="header-controls">
-            <nav>
-                <button id="nav-calc" class="active" onclick="switchTab('calc')">Calculadora</button>
-                <button id="nav-venda" onclick="switchTab('venda')">Tabela de Preços</button>
-            </nav>
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Pesquisar peça ou veículo..." onkeyup="filterContent()">
+    <h1 class="header-title">TABELA DE PREÇOS - KONOHA</h1>
+
+    <div class="main-grid">
+        
+        <div class="left-col">
+            <div class="section" style="margin-bottom: 20px;">
+                <h2>TUNNAGEM - PREÇO AVULSO</h2>
+                <table class="tunnagem-table">
+                    <tr>
+                        <th>ITEM</th>
+                        <th>NÍVEL 1</th>
+                        <th>NÍVEL 2</th>
+                        <th>NÍVEL 3</th>
+                        <th>NÍVEL 4</th>
+                    </tr>
+                    <tr>
+                        <td><div class="row-item"><img src="LINK_MOTOR"> MOTOR</div></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 15000)">15.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 25000)">25.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 35000)">35.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 45000)">45.000</button></td>
+                    </tr>
+                    <tr>
+                        <td><div class="row-item"><img src="LINK_FREIO"> FREIOS</div></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 25000)">25.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 30000)">30.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 35000)">35.000</button></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><div class="row-item"><img src="LINK_TRANS"> TRANSM.</div></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 30000)">30.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 40000)">40.000</button></td>
+                        <td><button class="btn-price" onclick="togglePrice(this, 50000)">50.000</button></td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>EMBELEZAMENTO INTERNO</h2>
+                <div class="items-container">
+                    <div class="card" onclick="togglePrice(this, 20000)">
+                        <img src="LINK_VOLANTE">
+                        <span class="name">Volante</span>
+                        <span class="price">20.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 20000)">
+                        <img src="LINK_CAMBIO">
+                        <span class="name">Câmbio</span>
+                        <span class="price">20.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 5000)">
+                        <img src="LINK_SOM">
+                        <span class="name">Som</span>
+                        <span class="price">5.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 50000)">
+                        <img src="LINK_ENFEITE">
+                        <span class="name">Enfeites</span>
+                        <span class="price">50.000</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <div id="tab-calc" class="main-content active">
-        <div class="top-panel">
-            <div class="btn-group">
-                <button class="btn" onclick="toggleSelection(this, 5000)">Reparo Interno <b>$ 5.000</b></button>
-                <button class="btn" onclick="toggleSelection(this, 8000)">Reparo Externo <b>$ 8.000</b></button>
-                <button class="btn" onclick="toggleSelection(this, 290000)">Full Carro <b>$ 290k</b></button>
-                <button class="btn" onclick="toggleSelection(this, 230000)">Full Moto <b>$ 230k</b></button>
-                <button class="btn btn-clear" onclick="resetAll()">Limpar Tudo</button>
-            </div>
-            <div class="total-display-box">
-                <div id="display-total" class="total-val">$ 0</div>
-            </div>
-        </div>
+        <div class="right-col">
+            <div class="section">
+                <h2>EMBELEZAMENTO EXTERNO</h2>
+                <div class="items-container">
+                    <div class="card" onclick="togglePrice(this, 8000)">
+                        <img src="LINK_AERO">
+                        <span class="name">Aerofólio</span>
+                        <span class="price">8.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 15000)">
+                        <img src="LINK_DECAL">
+                        <span class="name">Decal</span>
+                        <span class="price">15.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 30000)">
+                        <img src="LINK_FAROL">
+                        <span class="name">Farol</span>
+                        <span class="price">30.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 20000)">
+                        <img src="LINK_HIDRA">
+                        <span class="name">Hidráulica</span>
+                        <span class="price">20.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 10000)">
+                        <img src="LINK_PINTURA">
+                        <span class="name">Pintura</span>
+                        <span class="price">10.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 25000)">
+                        <img src="LINK_PORTAPLACA">
+                        <span class="name">Porta-Placa</span>
+                        <span class="price">25.000</span>
+                    </div>
+                </div>
 
-        <div class="parts-grid">
-            <div class="category">
-                <h3>Performance</h3>
-                <div class="item" onclick="toggleSelection(this, 50000)">Motor Nv 4 <span class="p-val">50k</span></div>
-                <div class="item" onclick="toggleSelection(this, 50000)">Turbo Único <span class="p-val">50k</span></div>
-                <div class="item" onclick="toggleSelection(this, 40000)">Freio Nv 3 <span class="p-val">40k</span></div>
-                <div class="item" onclick="toggleSelection(this, 55000)">Transm. Nv 3 <span class="p-val">55k</span></div>
-                <div class="item" onclick="toggleSelection(this, 45000)">Suspensão Nv 4 <span class="p-val">45k</span></div>
-            </div>
-
-            <div class="category">
-                <h3>Blindagem</h3>
-                <div class="item" onclick="toggleSelection(this, 115000)">Blindagem 100% <span class="p-val">115k</span></div>
-                <div class="item" onclick="toggleSelection(this, 95000)">Blindagem 80% <span class="p-val">95k</span></div>
-                <div class="item" onclick="toggleSelection(this, 70000)">Blindagem 60% <span class="p-val">70k</span></div>
-                <div class="item" onclick="toggleSelection(this, 45000)">Blindagem 40% <span class="p-val">45k</span></div>
-                <div class="item" onclick="toggleSelection(this, 25000)">Blindagem 20% <span class="p-val">25k</span></div>
-            </div>
-
-            <div class="category">
-                <h3>Visual Ext.</h3>
-                <div class="item" onclick="toggleSelection(this, 60000)">Rodas (Full) <span class="p-val">60k</span></div>
-                <div class="item" onclick="toggleSelection(this, 35000)">Farol Xenon <span class="p-val">35k</span></div>
-                <div class="item" onclick="toggleSelection(this, 15000)">Pintura <span class="p-val">15k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Neon Kit <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Vidros <span class="p-val">10k</span></div>
-            </div>
-
-            <div class="category">
-                <h3>Visual Int.</h3>
-                <div class="item" onclick="toggleSelection(this, 25000)">Volante/Câmbio <span class="p-val">25k</span></div>
-                <div class="item" onclick="toggleSelection(this, 60000)">Enfeites <span class="p-val">60k</span></div>
-                <div class="item" onclick="toggleSelection(this, 20000)">Design <span class="p-val">20k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Som <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 35000)">Placas <span class="p-val">35k</span></div>
-            </div>
-
-            <div class="category">
-                <h3>Extras</h3>
-                <div class="item" onclick="toggleSelection(this, 10000)">Drift Kit <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Buzina <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Escapamento <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Parachoques <span class="p-val">10k</span></div>
-                <div class="item" onclick="toggleSelection(this, 10000)">Santantônio <span class="p-val">10k</span></div>
+                <h2 style="margin-top:20px">RODAS</h2>
+                <div class="items-container">
+                    <div class="card" onclick="togglePrice(this, 50000)">
+                        <img src="LINK_RODAS">
+                        <span class="name">Rodas Completo</span>
+                        <span class="price">50.000</span>
+                    </div>
+                    <div class="card" onclick="togglePrice(this, 8000)">
+                        <img src="LINK_DRIFT">
+                        <span class="name">Pneu Drift</span>
+                        <span class="price">8.000</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="tab-venda" class="main-content">
-        <div class="venda-container" id="v-list"></div>
+        <div class="footer-info">
+            <div class="full-prices">
+                FULL TUNNING SEM BLINDAGEM: <span>250.000</span><br>
+                FULL TUNNING MOTO SEM SUSPENSÃO: <span>200.000</span>
+            </div>
+            <div class="total-display">
+                TOTAL: R$ <span id="total-final">0</span>
+            </div>
+        </div>
     </div>
 
     <script>
-        const veiculos = [
-            {n: "BabyBMX", p: 650000}, {n: "BF400", p: 650000}, {n: "BS17", p: 850000}, {n: "CarbonRS", p: 750000}, {n: "Faggio2", p: 500000}, {n: "Fatboy", p: 700000}, {n: "PCX", p: 900000}, {n: "Akuma", p: 250000}, {n: "Bati2", p: 550000}, {n: "Chimera", p: 500000}, {n: "F4RR", p: 600000}, {n: "Manchez3", p: 300000}, {n: "Powersurge", p: 300000}, {n: "Ratbike", p: 300000}, {n: "Rrocket", p: 300000}, {n: "Sanctus", p: 300000}, {n: "Vortex", p: 350000}, {n: "Babyr8", p: 800000}, {n: "Bison", p: 300000}, {n: "Brioso", p: 400000}, {n: "Carbonizzare", p: 400000}, {n: "Dominator", p: 650000}, {n: "Elegy2", p: 800000}, {n: "Entity2", p: 450000}, {n: "Entity3", p: 500000}, {n: "Eudora", p: 550000}, {n: "Everon2", p: 500000}, {n: "Fd", p: 850000}, {n: "Flashgt", p: 450000}, {n: "FURIA", p: 900000}, {n: "Issi8", p: 500000}, {n: "Jugular", p: 400000}, {n: "Mesa3", p: 400000}, {n: "Neon", p: 500000}, {n: "Openwheel2", p: 400000}, {n: "Panthere", p: 450000}, {n: "Ruston", p: 400000}, {n: "Sultan3", p: 400000}, {n: "Surfer3", p: 350000}, {n: "T20", p: 900000}, {n: "Tahoma", p: 500000}, {n: "Tampa2", p: 1800000}, {n: "Tulip2", p: 350000}, {n: "Tyrus", p: 400000}, {n: "Vagner", p: 500000}, {n: "Virtue", p: 450000}, {n: "Weevil (Fusca)", p: 400000}, {n: "Windsor", p: 400000}, {n: "Zentorno", p: 900000}, {n: "Zorrusso", p: 650000}
-        ];
-
         let total = 0;
-        const vList = document.getElementById('v-list');
-        veiculos.sort((a,b) => a.n.localeCompare(b.n)).forEach(v => { 
-            vList.innerHTML += `<div class="v-row"><span>${v.n}</span><span>R$ ${v.p.toLocaleString('pt-BR')}</span></div>`; 
-        });
+        const display = document.getElementById('total-final');
 
-        function updateDisplay() { document.getElementById('display-total').innerText = `$ ${total.toLocaleString('pt-BR')}`; }
-        function toggleSelection(el, price) {
-            el.classList.toggle('selected');
-            total = el.classList.contains('selected') ? total + price : total - price;
-            updateDisplay();
-        }
-        function resetAll() {
-            total = 0; updateDisplay();
-            document.querySelectorAll('.selected').forEach(i => i.classList.remove('selected'));
-        }
-        function switchTab(tab) {
-            document.querySelectorAll('.main-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-            document.getElementById('tab-' + tab).classList.add('active');
-            document.getElementById('nav-' + tab).classList.add('active');
-        }
-        function filterContent() {
-            let input = document.getElementById('search-input').value.toLowerCase();
-            document.querySelectorAll('.item, .v-row').forEach(el => {
-                el.style.display = el.innerText.toLowerCase().includes(input) ? 'flex' : 'none';
-            });
+        function togglePrice(el, value) {
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+                total -= value;
+            } else {
+                el.classList.add('active');
+                total += value;
+            }
+            display.innerText = total.toLocaleString('pt-BR');
         }
     </script>
 </body>
