@@ -21,7 +21,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
-            /* Transição suave para todos os elementos */
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -33,15 +32,12 @@
             min-height: 100vh;
         }
 
-        /* --- EFEITOS GERAIS ADICIONADOS --- */
-        /* Efeito de clique (afundar) para botões e itens */
         .btn-toggle:active, .btn-utility:active, .btn-infinite:active, 
         .btn-apply-custom:active, .reset-fab:active, .part-item:active, .tab-btn:active {
             transform: scale(0.95) !important;
             transition: transform 0.1s ease;
         }
 
-        /* Foco brilhante nos inputs */
         input:focus {
             outline: none;
             box-shadow: 0 0 20px var(--neon-pink);
@@ -52,13 +48,11 @@
              border-color: var(--success) !important;
         }
 
-        /* Animação de pulso para o Total */
         @keyframes neon-pulse {
             0% { text-shadow: 0 0 15px var(--neon-pink); transform: scale(1); }
             50% { text-shadow: 0 0 30px var(--neon-pink), 0 0 50px var(--hot-pink); transform: scale(1.02); }
             100% { text-shadow: 0 0 15px var(--neon-pink); transform: scale(1); }
         }
-        /* ---------------------------------- */
 
         .sakura-canvas {
             position: fixed;
@@ -103,7 +97,6 @@
         #grand-total { 
             font-size: 2.8rem; font-weight: 900; color: #fff; 
             text-shadow: 0 0 15px var(--neon-pink);
-            /* Aplica a animação de pulso */
             animation: neon-pulse 3s infinite ease-in-out;
         }
 
@@ -179,7 +172,6 @@
             transform: translateY(-3px) scale(1.05);
         }
 
-        /* AREA DE DESCONTO */
         .discount-container {
             display: flex; gap: 10px; background: rgba(255, 0, 255, 0.05);
             border: 2px solid var(--success); padding: 10px; border-radius: 15px; align-items: center;
@@ -222,6 +214,12 @@
             box-shadow: 0 0 20px var(--success);
             transform: translateY(-3px);
             background: rgba(225, 0, 255, 0.1);
+        }
+
+        /* --- MUDANÇA DA COR DO VALOR AQUI --- */
+        .car-card span:last-child {
+            color: #00ff0d; /* Cor Ciano Neon para destacar o preço */
+            text-shadow: 0 0 10px rgb(30, 255, 0);
         }
 
         .reset-fab {
