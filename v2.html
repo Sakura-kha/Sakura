@@ -111,14 +111,20 @@
         }
         .tab-btn.active { background: var(--neon-pink); color: #000; box-shadow: 0 0 30px var(--neon-pink); }
 
-        .main-container { max-width: 1600px; margin: 0 auto; padding: 0 40px 100px; }
-        .parts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .main-container { max-width: 1800px; margin: 0 auto; padding: 0 40px 100px; }
+        
+        /* Ajuste aqui: Diminuí o min-width de 320px para 280px para caber mais colunas */
+        .parts-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 20px; 
+        }
         
         .category-box { 
             background: var(--card-bg); 
             border: 1px solid var(--glass-border); 
             border-radius: 25px; 
-            padding: 25px;
+            padding: 20px;
             backdrop-filter: blur(5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
@@ -134,9 +140,9 @@
         }
 
         .part-item {
-            display: flex; justify-content: space-between; padding: 15px;
-            background: rgba(255,255,255,0.03); margin-bottom: 10px; border-radius: 12px;
-            cursor: pointer; font-size: 1rem; font-weight: 600; border: 1px solid transparent;
+            display: flex; justify-content: space-between; padding: 12px;
+            background: rgba(255,255,255,0.03); margin-bottom: 8px; border-radius: 12px;
+            cursor: pointer; font-size: 0.95rem; font-weight: 600; border: 1px solid transparent;
         }
         .part-item:hover { 
             border-color: var(--neon-pink); 
@@ -216,9 +222,8 @@
             background: rgba(225, 0, 255, 0.1);
         }
 
-        /* --- MUDANÇA DA COR DO VALOR AQUI --- */
         .car-card span:last-child {
-            color: #00ff0d; /* Cor Ciano Neon para destacar o preço */
+            color: #00ff0d;
             text-shadow: 0 0 10px rgb(30, 255, 0);
         }
 
@@ -273,95 +278,86 @@
                     <div class="btn-utility" onclick="toggleQuick(this, 10000)">PNEU (10k)</div>
                     <div class="discount-container">
                         <input type="number" id="perc-input" class="discount-input" placeholder="%">
-                        <button class="btn-apply-custom" onclick="applyCustomDiscount()">Aplicar %</button>
+                        <button class="btn-apply-custom" onclick="applyCustomDiscount()">Aplicar desconto</button>
                     </div>
                 </div>
 
                 <div class="parts-grid" id="main-grid">
                     <div class="category-box">
-                        <h3>🚀 MOTOR</h3>
-                        <div class="part-item" onclick="togglePart(this, 20000)">Motor Nível 1 <span>$20k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 30000)">Motor Nível 2 <span>$30k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 40000)">Motor Nível 3 <span>$40k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 50000)">Motor Nível 4 <span>$50k</span></div>
+                        <h3>🚀 ESTÉTICA PARTE 1 🚀</h3>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Aerofólio<span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Parachoque dianteiro<span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 20000)">Parachoque Traseiro<span>$20k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Capô <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Teto <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 20000)">Decal/Adesivo <span>$20k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Escapamento <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 35000)">Farol <span>$35k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Vidro <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Para-lama <span>$10k</span></div>
+                    </div>
+
+                    <div class="category-box">
+                        <h3>🚀 ESTÉTICA PARTE 2 🚀</h3>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Saia <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Chassi <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 15000)">Pintura Completa <span>$15k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 5000)">Cor<span>$5k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 5000)">Perolado <span>$5k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Neon<span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 60000)">Roda Completa <span>$60k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 30000)">Roda <span>$30k</span></div> 
+                        <div class="part-item" onclick="togglePart(this, 10000)">Grelha <span>$10k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Buzina <span>$10k</span></div>
+                    </div>
+
+                    <div class="category-box">
+                        <h3>🛡️ ESTRUTURA P1 🛡️</h3>
+                        <div class="part-item" onclick="togglePart(this, 20000)">Motor nivel 1 <span>$20k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 30000)">Motor nivel 2 <span>$30k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 40000)">Motor nivel 3 <span>$40k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Motor nivel 4 <span>$50k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 30000)">Freio 1 <span>$30k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 35000)">Freio 2 <span>$35k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 40000)">Freio 3 <span>$40k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 35000)">Transmissão 1 <span>$35k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 45000)">Transmissão 2 <span>$45k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 55000)">Transmissão 3 <span>$55k</span></div>
+                    </div>
+
+                    <div class="category-box">
+                        <h3>🛡️ ESTRUTURA P2 🛡️</h3>
+                        <div class="part-item" onclick="togglePart(this, 15000)">Suspensão 1 <span>$15k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 25000)">Suspensão 2 <span>$25k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 35000)">Suspensão 3 <span>$35k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 40000)">Suspensão 4 <span>$40k</span></div>
                         <div class="part-item" onclick="togglePart(this, 50000)">Turbo <span>$50k</span></div>
-                    </div>
-
-                    <div class="category-box">
-                        <h3>⚙️ MECÂNICA</h3>
-                        <div class="part-item" onclick="togglePart(this, 30000)">Freio Nível 1 <span>$30k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 35000)">Freio Nível 2 <span>$35k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 40000)">Freio Nível 3 <span>$40k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 35000)">Transmissão Nível 1 <span>$35k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 45000)">Transmissão Nível 2 <span>$45k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 55000)">Transmissão Nível 3 <span>$55k</span></div>
-                    </div>
-
-                    <div class="category-box">
-                        <h3>🛡️ ESTRUTURA</h3>
-                        <div class="part-item" onclick="togglePart(this, 15000)">Suspensão Nível 1 <span>$15k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Suspensão Nível 2 <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 35000)">Suspensão Nível 3 <span>$35k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 45000)">Suspensão Nível 4 <span>$45k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Blindagem 20% <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 45000)">Blindagem 40% <span>$45k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 70000)">Blindagem 60% <span>$70k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 95000)">Blindagem 80% <span>$95k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 115000)">Blindagem 100% <span>$115k</span></div>
-                    </div>
-
-                    <div class="category-box">
-                        <h3>🛋️ INTERNO</h3>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Volante <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Câmbio <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Ponteiros <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 60000)">Enfeites <span>$60k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 35000)">Placas internas <span>$35k</span></div>
                         <div class="part-item" onclick="togglePart(this, 20000)">Design interno <span>$20k</span></div>
                         <div class="part-item" onclick="togglePart(this, 10000)">Som <span>$10k</span></div>
                         <div class="part-item" onclick="togglePart(this, 15000)">Porta-malas <span>$15k</span></div>
-                    </div>
-
-                    <div class="category-box">
-                        <h3>🎨 ESTÉTICA P1</h3>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Aerofólio <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 20000)">Bloco Motor <span>$20k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Buzina <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Capô <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Chassi <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 20000)">Decal <span>$20k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Escapamento <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 5000)">Extras Peça <span>$5k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 35000)">Farol <span>$35k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 25000)">Hidráulica <span>$25k</span></div>
                         <div class="part-item" onclick="togglePart(this, 10000)">Filtro Ar <span>$10k</span></div>
                     </div>
 
                     <div class="category-box">
-                        <h3>🎨 ESTÉTICA P2</h3>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Grelha <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 25000)">Hidráulica <span>$25k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Neon <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Para-choque D. <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Para-choque T. <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Para-lama <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 15000)">Pintura <span>$15k</span></div>
+                        <h3>🛡️ ESTRUTURA P3 🛡️</h3>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Blindagem 20% <span>$25k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Blindagem 40%<span>$45k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Blindagem 60%<span>$70k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Blindagem 80% <span>$92k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 50000)">Blindagem 100% <span>$115k</span></div>
+                        <h3>💎 EXTRAS 💎 </h3>
+                        <div class="part-item" onclick="togglePart(this, 10000)">Tanque <span>$10k</span></div>
                         <div class="part-item" onclick="togglePart(this, 10000)">Placa <span>$10k</span></div>
                         <div class="part-item" onclick="togglePart(this, 25000)">Placa Custom <span>$25k</span></div>
                         <div class="part-item" onclick="togglePart(this, 30000)">Porta-placa <span>$30k</span></div>
-                    </div>
-
-                    <div class="category-box">
-                        <h3>✨ FINALIZAÇÃO</h3>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Saias <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Tanque <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Teto <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 10000)">Vidro <span>$10k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 5000)">Cor <span>$5k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 5000)">Customização <span>$5k</span></div>
                         <div class="part-item" onclick="togglePart(this, 10000)">Drift <span>$10k</span></div>
                         <div class="part-item" onclick="togglePart(this, 5000)">Fumaça <span>$5k</span></div>
-                        <div class="part-item" onclick="togglePart(this, 60000)">Rodas (Full) <span>$60k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 20000)">Bloco Motor <span>$20k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 5000)">Extras Peça <span>$5k</span></div>
+                        <div class="part-item" onclick="togglePart(this, 5000)">Customização <span>$5k</span></div>
                     </div>
+
                 </div>
             </div>
 
@@ -492,6 +488,7 @@
 
         function startSakura() {
             const box = document.getElementById('sakura-box');
+            if (box.children.length > 0) return;
             for(let i=0; i<40; i++) {
                 const p = document.createElement('div');
                 p.className = 'petal';
